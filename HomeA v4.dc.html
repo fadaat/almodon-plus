@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<script src="./image-slot.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="a" screen="H" homev="4" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<div dir="rtl" style="display:flex;justify-content:center"><div style="display:flex;gap:40px;align-items:flex-start">
+        <!-- mobile 1a -->
+        <sc-if value="{{ onlyM }}" hint-placeholder-val="{{ true }}"><div data-screen-label="1a Mobile" style="width:390px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none;color:#121417">
+          <dc-import name="NewsBlocks" part="header" active="home" mobile="{{ true }}" hint-size="100%,110px"></dc-import>
+          <dc-import name="NewsBlocks" part="top" tl="{{ tlCount }}" mobile="{{ true }}" hint-size="100%,1200px"></dc-import>
+          <div data-screen-label="Programs carousel" style="background:radial-gradient(ellipse 60% 70% at 85% 0%,rgba(63,151,207,.35),transparent 60%),radial-gradient(ellipse 50% 60% at 10% 100%,rgba(217,45,32,.28),transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(120,90,220,.12),transparent 70%),radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px) 0 0/22px 22px,linear-gradient(160deg,#08142B,#0A1324 45%,#120F24);padding:26px 0 30px;display:flex;flex-direction:column;gap:16px">
+  <div style="padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:800 20px/1.4 'Noto Kufi Arabic';color:#fff">شاهد الآن على {{ brand }}</span><a href="ProgramsA.dc.html" style="font:700 13px 'Noto Kufi Arabic';color:#C9D5E6;white-space:nowrap">كل البرامج ‹</a></div>
+  <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px;scroll-snap-type:x mandatory;scroll-padding:0 16px"><sc-for list="{{ xp }}" as="p" hint-placeholder-count="3"><a href="ShowPage.dc.html" style="flex:0 0 190px;aspect-ratio:340/604;position:relative;border-radius:12px;overflow:hidden;background:#111C30;display:block;scroll-snap-align:start">
+      <div style="position:absolute;inset:0"><image-slot id="poster-{{ p.key }}" shape="rect" src="{{ p.img }}" placeholder="بوستر {{ p.name }}"></image-slot></div>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(10,19,36,.95) 4%,rgba(10,19,36,.4) 40%,rgba(10,19,36,0) 62%)"></div>
+      <div style="position:absolute;inset:auto 0 0 0;padding:0 12px 14px;display:flex;flex-direction:column;gap:4px;pointer-events:none">
+        <sc-if value="{{ p.soon }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;background:#3F97CF;color:#fff;font:700 10px 'Noto Kufi Arabic';padding:2px 8px;border-radius:3px">قريباً</span></sc-if>
+        <sc-if value="{{ p.isLogo }}" hint-placeholder-val="{{ false }}"><img src="assets/logos/nashra-almodon.png" alt="نشرة المدن" style="align-self:center;width:140px;height:auto;display:block;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 4px 14px rgba(0,0,0,.45))"></sc-if><sc-if value="{{ p.noLogo }}" hint-placeholder-val="{{ true }}"><span style="font:800 17px/1.35 'Noto Kufi Arabic';color:#fff;text-wrap:balance">{{ p.name }}</span></sc-if>
+        <span style="font:500 12px 'IBM Plex Sans Arabic';color:#C9D5E6">{{ p.type }} · {{ p.count }}</span>
+      </div>
+    </a></sc-for><div style="flex:0 0 6px"></div></div>
+</div>
+          <dc-import name="EpgStrip" mobile="{{ true }}" hint-size="100%,48px"></dc-import>
+          <dc-import name="NewsBlocks" part="mid" reels="{{ true }}" reel-style="carousel" mobile="{{ true }}" hint-size="100%,1900px"></dc-import>
+          <dc-import name="NewsBlocks" part="bottom" mobile="{{ true }}" hint-size="100%,3000px"></dc-import>
+        <dc-import name="Footer" mobile="{{ true }}" brand="{{ brand }}" hint-size="100%,520px"></dc-import></div></sc-if>
+        <!-- desktop 1a -->
+        <sc-if value="{{ onlyD }}" hint-placeholder-val="{{ true }}"><div data-screen-label="1a Desktop" style="width:1440px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none;color:#121417">
+          <dc-import name="NewsBlocks" part="header" active="home" mobile="{{ false }}" hint-size="100%,170px"></dc-import>
+          <dc-import name="NewsBlocks" part="top" tl="{{ tlCount }}" mobile="{{ false }}" hint-size="100%,1100px"></dc-import>
+          <div data-screen-label="Programs expand" style="background:radial-gradient(ellipse 60% 70% at 85% 0%,rgba(63,151,207,.35),transparent 60%),radial-gradient(ellipse 50% 60% at 10% 100%,rgba(217,45,32,.28),transparent 60%),radial-gradient(ellipse 40% 40% at 50% 50%,rgba(120,90,220,.12),transparent 70%),radial-gradient(rgba(255,255,255,.07) 1px,transparent 1.2px) 0 0/22px 22px,linear-gradient(160deg,#08142B,#0A1324 45%,#120F24);padding:40px 0 48px;display:flex;flex-direction:column;gap:22px">
+  <div style="padding:0 60px;display:flex;align-items:center;justify-content:space-between;gap:12px"><span style="font:800 30px/1.4 'Noto Kufi Arabic';color:#fff">شاهد الآن على {{ brand }}</span><a href="ProgramsA.dc.html" style="font:700 15px 'Noto Kufi Arabic';color:#C9D5E6;white-space:nowrap">كل البرامج ‹</a></div>
+  <div style="position:relative"><div ref="{{ xRef }}" onScroll="{{ xScroll }}" onMouseLeave="{{ collapse }}" style="display:flex;gap:14px;overflow-x:auto;scrollbar-width:none;padding:0 60px;align-items:stretch"><sc-for list="{{ xp }}" as="p" hint-placeholder-count="5"><div data-xc="1" onMouseEnter="{{ p.enter }}" onMouseLeave="{{ p.leave }}" onClick="{{ p.tap }}" style="flex:{{ p.fd }};height:604px;position:relative;border-radius:14px;overflow:hidden;background:#111C30;cursor:pointer;outline:{{ p.ring }};outline-offset:5px;transition:flex .5s cubic-bezier(.3,.7,.2,1),outline-color .3s;margin:6px 0">
+      <sc-if value="{{ p.off }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0"><image-slot id="poster-{{ p.key }}" shape="rect" src="{{ p.img }}" placeholder="بوستر {{ p.name }}"></image-slot></div></sc-if>
+      <sc-if value="{{ p.on }}" hint-placeholder-val="{{ false }}"><img src="{{ p.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></sc-if>
+      <sc-if value="{{ p.vid }}" hint-placeholder-val="{{ false }}"><video ref="{{ vidRef }}" src="{{ p.trailer }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video></sc-if>
+      <div style="position:absolute;inset:0;pointer-events:none;background:linear-gradient(0deg,rgba(10,19,36,.95) 4%,rgba(10,19,36,.45) 38%,rgba(10,19,36,0) 62%)"></div>
+      <sc-if value="{{ p.off }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:auto 0 0 0;padding:0 20px 26px;display:flex;flex-direction:column;gap:6px;pointer-events:none">
+        <sc-if value="{{ p.isLogo }}" hint-placeholder-val="{{ false }}"><img src="assets/logos/nashra-almodon.png" alt="نشرة المدن" style="align-self:center;width:190px;height:auto;display:block;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 4px 14px rgba(0,0,0,.45))"></sc-if><sc-if value="{{ p.noLogo }}" hint-placeholder-val="{{ true }}"><span style="font:800 26px/1.3 'Noto Kufi Arabic';color:#fff;text-wrap:balance">{{ p.name }}</span></sc-if>
+        <sc-if value="{{ p.soon }}" hint-placeholder-val="{{ false }}"><span style="align-self:flex-start;background:#3F97CF;color:#fff;font:700 11px 'Noto Kufi Arabic';padding:2px 10px;border-radius:3px">قريباً</span></sc-if>
+      </div></sc-if>
+      <sc-if value="{{ p.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;padding:36px;display:flex;flex-direction:column;justify-content:flex-end;gap:12px">
+        <div onClick="{{ close }}" style="position:absolute;top:22px;left:22px;color:#fff;cursor:pointer;width:36px;height:36px;display:grid;place-items:center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
+        <sc-if value="{{ p.isLogo }}" hint-placeholder-val="{{ false }}"><img src="assets/logos/nashra-almodon.png" alt="نشرة المدن" style="align-self:flex-start;width:170px;height:auto;display:block;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95)) drop-shadow(0 0 1.5px rgba(255,255,255,.9)) drop-shadow(0 4px 14px rgba(0,0,0,.45))"></sc-if><sc-if value="{{ p.noLogo }}" hint-placeholder-val="{{ true }}"><span style="font:800 34px/1.3 'Noto Kufi Arabic';color:#fff;text-wrap:balance;max-width:560px">{{ p.name }}</span></sc-if>
+        <div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px;font:500 15px 'IBM Plex Sans Arabic';color:#fff"><span>{{ p.type }}</span><span style="width:5px;height:5px;border-radius:50%;background:#fff"></span><span>{{ p.count }}</span><span style="color:rgba(255,255,255,.5)">|</span><span>{{ p.host }}</span></div>
+        <span style="font:700 17px/1.6 'Noto Kufi Arabic';color:#F2A65A;max-width:620px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ p.line }}</span>
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px">
+          <sc-if value="{{ p.live }}" hint-placeholder-val="{{ true }}"><a href="ShowPage.dc.html" style="display:flex;align-items:center;gap:10px;background:#fff;color:#0A1324;border-radius:999px;height:48px;padding:0 24px;font:700 15px 'Noto Kufi Arabic'"><svg width="20" height="20" viewBox="0 0 24 24" fill="#0A1324"><path d="M7 4.5v15l12-7.5z"></path></svg>شاهد الآن</a></sc-if>
+          <sc-if value="{{ p.soon }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:10px;background:#3F97CF;color:#fff;border-radius:999px;height:48px;padding:0 24px;font:700 15px 'Noto Kufi Arabic'">ذكّرني</div></sc-if>
+          <div  style="width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;cursor:pointer;flex:none" style-hover="background:rgba(255,255,255,.25)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"></path></svg></div><div  style="width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;cursor:pointer;flex:none" style-hover="background:rgba(255,255,255,.25)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20s-7-4.5-9.2-9C1.4 8 3.3 4.5 6.8 4.5c2 0 3.4 1.1 5.2 3 1.8-1.9 3.2-3 5.2-3 3.5 0 5.4 3.5 4 6.5C19 15.5 12 20 12 20z"></path></svg></div>
+          <sc-if value="{{ p.vid }}" hint-placeholder-val="{{ false }}"><div style="margin-inline-start:auto"><div onClick="{{ toggleMute }}" style="width:46px;height:46px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:rgba(255,255,255,.12);display:grid;place-items:center;color:#fff;cursor:pointer;flex:none" style-hover="background:rgba(255,255,255,.25)"><sc-if value="{{ muted }}" hint-placeholder-val="{{ true }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"></path><path d="M17 9l5 6M22 9l-5 6"></path></svg></sc-if><sc-if value="{{ unmuted }}" hint-placeholder-val="{{ false }}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9v6h4l5 4V5L8 9z"></path><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"></path></svg></sc-if></div></div></sc-if>
+        </div>
+      </div></sc-if>
+    </div></sc-for><div style="flex:0 0 20px"></div></div>
+    <sc-if value="{{ canPrev }}" hint-placeholder-val="{{ false }}"><div onClick="{{ xPrev }}" style="position:absolute;top:6px;bottom:6px;right:0;width:72px;display:grid;place-items:center;cursor:pointer;color:#fff;background:linear-gradient(270deg,rgba(10,19,36,.9),rgba(10,19,36,0))" style-hover="background:linear-gradient(270deg,rgba(10,19,36,1),rgba(10,19,36,.2))"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"></path></svg></div></sc-if>
+    <sc-if value="{{ canNext }}" hint-placeholder-val="{{ true }}"><div onClick="{{ xNext }}" style="position:absolute;top:6px;bottom:6px;left:0;width:72px;display:grid;place-items:center;cursor:pointer;color:#fff;background:linear-gradient(90deg,rgba(10,19,36,.9),rgba(10,19,36,0))" style-hover="background:linear-gradient(90deg,rgba(10,19,36,1),rgba(10,19,36,.2))"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"></path></svg></div></sc-if>
+  </div>
+</div>
+          <dc-import name="EpgStrip" mobile="{{ false }}" hint-size="100%,52px"></dc-import>
+          <dc-import name="NewsBlocks" part="mid" reels="{{ true }}" reel-style="carousel" mobile="{{ false }}" hint-size="100%,2100px"></dc-import>
+          <dc-import name="NewsBlocks" part="bottom" mobile="{{ false }}" hint-size="100%,3200px"></dc-import>
+        <dc-import name="Footer" mobile="{{ false }}" brand="{{ brand }}" hint-size="100%,300px"></dc-import></div></sc-if>
+      </div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;timeline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;كامل (10)&quot;,&quot;قليل (3)&quot;,&quot;خبر واحد&quot;,&quot;لا يوجد&quot;],&quot;default&quot;:&quot;كامل (10)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;آخر الأخبار&quot;}}">
+class Component extends DCLogic {
+  state = { bs: 1, xa: -1, muted: true };
+  xp() {
+    const D = window.PLUS_DATA || { shows: [] };
+    const trailers = { 0: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4', 2: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4' };
+    const L = D.shows.filter(x => !x.soon).concat(D.shows.filter(x => x.soon)), a = this.state.xa;
+    const open = i => { if (this.state.xa !== i) { this.setState({ xa: i }); this.ensure(i); } };
+    const set = i => { if (performance.now() < (this.lock || 0)) return; clearTimeout(this.xt); this.xt = setTimeout(() => open(i), 180); };
+    const xp = L.map((s, i) => { const on = i === a, soon = !!s.soon || !s.eps, tr = this.props.trailers === false ? null : (s.trailer || trailers[i]);
+      return { key: s.id || i, isLogo: s.name === 'نشرة المدن', noLogo: s.name !== 'نشرة المدن', name: s.name, img: s.img, type: s.type, host: s.host, on, off: !on, soon, live: !soon, vid: on && !!tr, trailer: tr,
+        count: soon ? 'قريباً' : s.eps + ' حلقة', line: soon ? (s.premiere || s.schedule || 'الحلقة الأولى قريباً') : (s.schedule || s.desc),
+        fd: on ? '0 0 920px' : '0 0 340px', fm: on ? '0 0 300px' : '0 0 130px', ring: on ? '2px solid #fff' : '2px solid transparent',
+        enter: () => set(i), leave: () => clearTimeout(this.xt), tap: () => open(i) }; });
+    const S = this.state.xs || { p: false, n: true }, by = d => { const s = this.xRef.current; if (s) s.scrollBy({ left: d * Math.max(400, s.clientWidth - 240), behavior: 'smooth' }); };
+    return { xp, xRef: this.xRef, canPrev: S.p, canNext: S.n,
+      xScroll: () => this.syncArrows(), xPrev: () => by(1), xNext: () => by(-1), muted: this.state.muted, unmuted: !this.state.muted,
+      vidRef: el => { if (el) { el.muted = this.state.muted; if (el.paused) el.play().catch(() => {}); } },
+      toggleMute: e => { e.stopPropagation(); this.setState(s => ({ muted: !s.muted })); },
+      collapse: () => { clearTimeout(this.xt); if (this.state.xa !== -1) this.setState({ xa: -1 }); },
+      close: e => { e.stopPropagation(); clearTimeout(this.xt); this.setState({ xa: -1 }); } };
+  }
+  band() {
+    const D = window.PLUS_DATA || { episodes: [], shows: [] };
+    const S = D.shows.filter(x => !x.soon).slice(0, 4), sh = S[this.state.bs] || {}, all = D.episodes;
+    const mine = all.filter(e => e.show === sh.name);
+    const pool = mine.concat(all.filter(e => e.show !== sh.name).map(e => ({ ...e, show: sh.name })));
+    const feat = pool.find(e => e.kind === 'حلقة كاملة') || pool[0] || {};
+    const more = pool.filter(e => e !== feat && e.kind !== 'إعلان ترويجي' && e.kind !== 'فاصل').map(e => ({ ...e, sub: e.ep || e.age }));
+    return {
+      bShow: sh, bFeat: feat, bFeatMeta: [feat.ep, feat.dur].filter(Boolean).join(' · '),
+      bMore3: more.slice(0, 3), bMore4: more.slice(0, 4), bSoon: D.shows.filter(x => x.soon).slice(0, 1),
+      bShows: S.map((x, i) => { const a = i === this.state.bs; return { name: x.name, on: () => this.setState({ bs: i }), bd: a ? '#F7C600' : 'rgba(255,255,255,.15)', fg: a ? '#F7C600' : '#C9D5E6' }; })
+    };
+  }
+  renderVals() { return Object.assign({ onlyM: this.props.only !== 'D', onlyD: this.props.only !== 'M', brand: this.props.brand ?? 'برامج المدن', tlCount: { 'كامل (10)': '10', 'قليل (3)': '3', 'خبر واحد': '1', 'لا يوجد': '0' }[this.props.timeline] ?? '10' }, this._rv(), this.band(), this.pan(), this.shNav(), this.xp()); }
+  trk = React.createRef();
+  xRef = React.createRef();
+  syncArrows() { const s = this.xRef.current; if (!s) return; const x = Math.abs(s.scrollLeft), max = s.scrollWidth - s.clientWidth;
+    const p = x > 4, n = x < max - 4, o = this.state.xs || {}; if (o.p !== p || o.n !== n) this.setState({ xs: { p, n } }); }
+  ensure(i) { const s = this.xRef.current; if (!s) return; const t0 = performance.now(), pad = 60; this.lock = t0 + 800;
+    const step = () => { const c = s.querySelectorAll('[data-xc]')[i]; if (!c) return; const r = c.getBoundingClientRect(), b = s.getBoundingClientRect();
+      if (r.right > b.right - pad) s.scrollLeft += r.right - (b.right - pad); else if (r.left < b.left + pad) s.scrollLeft -= (b.left + pad) - r.left;
+      if (performance.now() - t0 < 600) requestAnimationFrame(step); else this.syncArrows(); };
+    requestAnimationFrame(step); }
+  componentDidMount() {
+    let pos = null;
+    const tick = () => {
+      const el = this.trk.current;
+      if (el && el.scrollWidth > el.clientWidth) {
+        const half = el.scrollWidth / 2, sgn = getComputedStyle(el).direction === 'rtl' ? -1 : 1;
+        if (pos === null || Math.abs(el.scrollLeft - pos) > 2) pos = el.scrollLeft;
+        if (!this.paused) pos += 0.2 * sgn;
+        if (Math.abs(pos) >= half) pos -= half * sgn;
+        if (sgn * pos < 0) pos += half * sgn;
+        el.scrollLeft = pos;
+      }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  shR = React.createRef();
+  shNav() { return { shRef: this.shR, shNext: () => { const el = this.shR.current; if (el) el.scrollBy({ left: -el.clientWidth / 2 }); }, shPrev: () => { const el = this.shR.current; if (el) el.scrollBy({ left: el.clientWidth / 2 }); } }; }
+  pan() {
+    const D = window.PLUS_DATA || { episodes: [], shows: [] };
+    const tints = ['rgba(63,151,207,.4)', 'rgba(63,151,207,.35)', 'rgba(217,45,32,.5)', 'rgba(63,151,207,.4)', 'rgba(196,150,80,.45)', 'rgba(217,45,32,.35)'];
+    const lines = ['#D92D20', '#3F97CF', '#D92D20', '#3F97CF', '#F7C600', '#D92D20'];
+    const eps = D.episodes.filter(e => e.kind !== 'إعلان ترويجي' && e.kind !== 'فاصل');
+    const pans = D.shows.filter(x => !x.soon).slice(0, 6).map((s, i) => ({ name: s.name, img: s.img, tint: tints[i], line: lines[i],
+      ep: eps.find(e => e.show === s.name) || eps[i % eps.length] || {}, desc: s.desc, eps: s.eps,
+      w0: i === 0 ? '330px' : '262px', w1: i === 0 ? '262px' : '226px', mr0: i === 0 ? '0' : '-46px', mr1: i === 0 ? '0' : '-36px' }));
+    return { pans, pansLoop: pans.concat(pans), trkRef: this.trk, trkPause: () => { this.paused = true; }, trkPlay: () => { this.paused = false; } };
+  }
+  _rv() {
+    const D = window.PLUS_DATA || { episodes: [], shorts: [], shows: [], nav: [] };
+    const toSec = d => d.split(':').reduce((a, b) => a * 60 + (+b), 0);
+    const fmt = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    const cw = D.episodes.map((e, i) => ({ ...e, p: e.p || [0.45, 0.7, 0.2, 0.55][i % 4] }))
+      .filter(e => e.kind === 'حلقة كاملة')
+      .map(e => ({ ...e, pct: Math.round(e.p * 100) + '%', left: fmt(Math.round(toSec(e.dur) * (1 - e.p))) }));
+    return {
+      nav: D.nav, navShort: D.nav.slice(0, 5),
+      featured: D.episodes[0] || {}, eps3: D.episodes.slice(1, 4), e2: D.episodes[1] || {},
+      shorts: D.shorts, shorts4: D.shorts.slice(0, 4), shorts6: D.shorts.slice(0, 6),
+      shows: D.shows, shows5: D.shows.slice(0, 5), cw, cw4: cw.slice(0, 4),
+      today: [{ time: '18:00', name: 'نشرة المدن', note: 'يومياً' }, { time: '20:00', name: 'وجهًا لوجه', note: 'حلقة جديدة' }, { time: '21:30', name: 'شو رأيك؟', note: 'إعادة' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

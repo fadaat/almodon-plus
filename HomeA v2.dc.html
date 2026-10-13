@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="a" screen="H" homev="2" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<div dir="rtl" style="display:flex;justify-content:center"><div style="display:flex;gap:40px;align-items:flex-start">
+        <!-- mobile 1a -->
+        <sc-if value="{{ onlyM }}" hint-placeholder-val="{{ true }}"><div data-screen-label="1a Mobile" style="width:390px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none;color:#121417">
+          <dc-import name="NewsBlocks" part="header" active="home" mobile="{{ true }}" hint-size="100%,110px"></dc-import>
+          <dc-import name="NewsBlocks" part="top" tl="{{ tlCount }}" mobile="{{ true }}" hint-size="100%,1200px"></dc-import>
+          <div style="background:radial-gradient(circle at 16% 18%,rgba(63,151,207,.28),transparent 20%),radial-gradient(circle at 10% 42%,rgba(217,45,32,.2),transparent 17%),radial-gradient(circle at 48% 30%,rgba(217,45,32,.08),transparent 22%),#F4F2EE;padding:26px 0 28px;display:flex;flex-direction:column;gap:20px">
+  <div style="padding:0 16px"><div style="display:flex;flex-direction:column;gap:12px">
+    <div style="display:flex;align-items:center;gap:10px"><span style="width:3px;height:18px;background:#D92D20;border-radius:2px"></span><span style="font:500 16px 'Noto Kufi Arabic';color:#3D4450">برامج</span></div>
+    <span style="font:800 24px/1.4 'Noto Kufi Arabic';color:#121417;text-wrap:balance">قصص أعمق من قلب الحدث</span>
+    <span style="font-size:14px;line-height:1.8;color:#3D4450;text-wrap:pretty">حوارات وتحقيقات وبرامج تكشف ما وراء الخبر وتستضيف أهم الأصوات من منطقتنا والعالم.</span>
+    <a href="#" style="align-self:flex-start;margin-top:4px;display:flex;align-items:center;gap:14px;border:1.5px solid #121417;color:#121417;border-radius:999px;height:44px;padding:0 20px;font:700 14px 'Noto Kufi Arabic'">جميع البرامج<span style="font:700 18px sans-serif">←</span></a>
+  </div></div>
+  <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px"><sc-for list="{{ pans }}" as="p" hint-placeholder-count="5"><div style="flex:0 0 200px;height:300px;position:relative;border-radius:8px;overflow:hidden;background:#071735">
+      <img src="{{ p.img }}" alt="" style="position:absolute;top:0;left:0;width:100%;height:62%;object-fit:cover">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg,#071735 40%,rgba(7,23,53,.3) 62%,{{ p.tint }})"></div>
+      <div style="position:absolute;inset:0;padding:0 14px 14px;display:flex;flex-direction:column;justify-content:flex-end;gap:8px">
+        <span style="font:800 18px/1.35 'Noto Kufi Arabic';color:#fff">{{ p.name }}</span>
+        <span style="width:60px;height:3px;border-radius:2px;background:{{ p.line }}"></span>
+        <span style="font-size:13px;line-height:1.7;color:#E3E9F2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px">{{ p.desc }}</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;color:#C9D5E6;font:500 12px 'IBM Plex Sans Arabic'"><span style="display:flex;align-items:center;gap:1px;flex:none"><span style="width:13px;height:10px;border:1.5px solid #C9D5E6;border-radius:2px"></span><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:5px solid #C9D5E6"></span></span>{{ p.eps }} حلقة</div>
+      </div>
+    </div></sc-for><div style="flex:0 0 6px"></div></div>
+</div>
+          <dc-import name="EpgStrip" mobile="{{ true }}" hint-size="100%,48px"></dc-import>
+          <dc-import name="NewsBlocks" part="mid" reels="{{ true }}" mobile="{{ true }}" hint-size="100%,1900px"></dc-import>
+          <dc-import name="NewsBlocks" part="bottom" mobile="{{ true }}" hint-size="100%,3000px"></dc-import>
+        <dc-import name="Footer" mobile="{{ true }}" brand="{{ brand }}" hint-size="100%,520px"></dc-import></div></sc-if>
+        <!-- desktop 1a -->
+        <sc-if value="{{ onlyD }}" hint-placeholder-val="{{ true }}"><div data-screen-label="1a Desktop" style="width:1440px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none;color:#121417">
+          <dc-import name="NewsBlocks" part="header" active="home" mobile="{{ false }}" hint-size="100%,170px"></dc-import>
+          <dc-import name="NewsBlocks" part="top" tl="{{ tlCount }}" mobile="{{ false }}" hint-size="100%,1100px"></dc-import>
+          <div style="background:radial-gradient(circle at 16% 18%,rgba(63,151,207,.28),transparent 20%),radial-gradient(circle at 10% 42%,rgba(217,45,32,.2),transparent 17%),radial-gradient(circle at 48% 30%,rgba(217,45,32,.08),transparent 22%),#F4F2EE;padding:28px 60px;display:flex;gap:40px;align-items:stretch">
+  <div style="flex:0 0 330px;display:flex;align-items:center"><div style="display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;gap:10px"><span style="width:3px;height:24px;background:#D92D20;border-radius:2px"></span><span style="font:500 20px 'Noto Kufi Arabic';color:#3D4450">برامج</span></div>
+    <span style="font:800 32px/1.4 'Noto Kufi Arabic';color:#121417;text-wrap:balance">قصص أعمق من قلب الحدث</span>
+    <span style="font-size:16px;line-height:1.8;color:#3D4450;text-wrap:pretty">حوارات وتحقيقات وبرامج تكشف ما وراء الخبر وتستضيف أهم الأصوات من منطقتنا والعالم.</span>
+    <a href="#" style="align-self:flex-start;margin-top:10px;display:flex;align-items:center;gap:14px;border:1.5px solid #121417;color:#121417;border-radius:999px;height:52px;padding:0 28px;font:700 15px 'Noto Kufi Arabic'">جميع البرامج<span style="font:700 18px sans-serif">←</span></a>
+  </div></div>
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:12px">
+    <div ref="{{ trkRef }}" onMouseEnter="{{ trkPause }}" onMouseLeave="{{ trkPlay }}" style="display:flex;gap:12px;overflow-x:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)"><sc-for list="{{ pansLoop }}" as="p" hint-placeholder-count="4"><div style="flex:0 0 340px;position:relative;border-radius:10px;overflow:hidden;background:#071735;display:flex;flex-direction:column">
+      <div style="position:relative;aspect-ratio:16/9"><img src="{{ p.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:0;background:linear-gradient(0deg,#071735 2%,rgba(7,23,53,.15) 45%,{{ p.tint }})"></div></div>
+      <div style="padding:4px 18px 18px;margin-top:-34px;position:relative;display:flex;flex-direction:column;gap:10px">
+        <span style="font:800 21px/1.35 'Noto Kufi Arabic';color:#fff">{{ p.name }}</span>
+        <span style="width:84px;height:3px;border-radius:2px;background:{{ p.line }}"></span>
+        <span style="font-size:14px;line-height:1.7;color:#E3E9F2;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;margin-top:2px">{{ p.desc }}</span>
+        <div style="display:flex;align-items:center;gap:8px;margin-top:6px;color:#C9D5E6;font:500 13px 'IBM Plex Sans Arabic'"><span style="display:flex;align-items:center;gap:1px;flex:none"><span style="width:13px;height:10px;border:1.5px solid #C9D5E6;border-radius:2px"></span><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-right:5px solid #C9D5E6"></span></span>{{ p.eps }} حلقة</div>
+      </div>
+    </div></sc-for></div>
+  </div>
+</div>
+          <dc-import name="EpgStrip" mobile="{{ false }}" hint-size="100%,52px"></dc-import>
+          <dc-import name="NewsBlocks" part="mid" reels="{{ true }}" mobile="{{ false }}" hint-size="100%,2100px"></dc-import>
+          <dc-import name="NewsBlocks" part="bottom" mobile="{{ false }}" hint-size="100%,3200px"></dc-import>
+        <dc-import name="Footer" mobile="{{ false }}" brand="{{ brand }}" hint-size="100%,300px"></dc-import></div></sc-if>
+      </div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;timeline&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;كامل (10)&quot;,&quot;قليل (3)&quot;,&quot;خبر واحد&quot;,&quot;لا يوجد&quot;],&quot;default&quot;:&quot;كامل (10)&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;آخر الأخبار&quot;}}">
+class Component extends DCLogic {
+  state = { bs: 1 };
+  band() {
+    const D = window.PLUS_DATA || { episodes: [], shows: [] };
+    const S = D.shows.filter(x => !x.soon).slice(0, 4), sh = S[this.state.bs] || {}, all = D.episodes;
+    const mine = all.filter(e => e.show === sh.name);
+    const pool = mine.concat(all.filter(e => e.show !== sh.name).map(e => ({ ...e, show: sh.name })));
+    const feat = pool.find(e => e.kind === 'حلقة كاملة') || pool[0] || {};
+    const more = pool.filter(e => e !== feat && e.kind !== 'إعلان ترويجي' && e.kind !== 'فاصل').map(e => ({ ...e, sub: e.ep || e.age }));
+    return {
+      bShow: sh, bFeat: feat, bFeatMeta: [feat.ep, feat.dur].filter(Boolean).join(' · '),
+      bMore3: more.slice(0, 3), bMore4: more.slice(0, 4), bSoon: D.shows.filter(x => x.soon).slice(0, 1),
+      bShows: S.map((x, i) => { const a = i === this.state.bs; return { name: x.name, on: () => this.setState({ bs: i }), bd: a ? '#F7C600' : 'rgba(255,255,255,.15)', fg: a ? '#F7C600' : '#C9D5E6' }; })
+    };
+  }
+  renderVals() { return Object.assign({ onlyM: this.props.only !== 'D', onlyD: this.props.only !== 'M', brand: this.props.brand ?? 'برامج المدن', tlCount: { 'كامل (10)': '10', 'قليل (3)': '3', 'خبر واحد': '1', 'لا يوجد': '0' }[this.props.timeline] ?? '10' }, this._rv(), this.band(), this.pan(), this.shNav()); }
+  trk = React.createRef();
+  componentDidMount() {
+    let pos = null;
+    const tick = () => {
+      const el = this.trk.current;
+      if (el && el.scrollWidth > el.clientWidth) {
+        const half = el.scrollWidth / 2, sgn = getComputedStyle(el).direction === 'rtl' ? -1 : 1;
+        if (pos === null || Math.abs(el.scrollLeft - pos) > 2) pos = el.scrollLeft;
+        if (!this.paused) pos += 0.2 * sgn;
+        if (Math.abs(pos) >= half) pos -= half * sgn;
+        if (sgn * pos < 0) pos += half * sgn;
+        el.scrollLeft = pos;
+      }
+      this.raf = requestAnimationFrame(tick);
+    };
+    this.raf = requestAnimationFrame(tick);
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); }
+  shR = React.createRef();
+  shNav() { return { shRef: this.shR, shNext: () => { const el = this.shR.current; if (el) el.scrollBy({ left: -el.clientWidth / 2 }); }, shPrev: () => { const el = this.shR.current; if (el) el.scrollBy({ left: el.clientWidth / 2 }); } }; }
+  pan() {
+    const D = window.PLUS_DATA || { episodes: [], shows: [] };
+    const tints = ['rgba(63,151,207,.4)', 'rgba(63,151,207,.35)', 'rgba(217,45,32,.5)', 'rgba(63,151,207,.4)', 'rgba(196,150,80,.45)', 'rgba(217,45,32,.35)'];
+    const lines = ['#D92D20', '#3F97CF', '#D92D20', '#3F97CF', '#F7C600', '#D92D20'];
+    const eps = D.episodes.filter(e => e.kind !== 'إعلان ترويجي' && e.kind !== 'فاصل');
+    const pans = D.shows.filter(x => !x.soon).slice(0, 6).map((s, i) => ({ name: s.name, img: s.img, tint: tints[i], line: lines[i],
+      ep: eps.find(e => e.show === s.name) || eps[i % eps.length] || {}, desc: s.desc, eps: s.eps,
+      w0: i === 0 ? '330px' : '262px', w1: i === 0 ? '262px' : '226px', mr0: i === 0 ? '0' : '-46px', mr1: i === 0 ? '0' : '-36px' }));
+    return { pans, pansLoop: pans.concat(pans), trkRef: this.trk, trkPause: () => { this.paused = true; }, trkPlay: () => { this.paused = false; } };
+  }
+  _rv() {
+    const D = window.PLUS_DATA || { episodes: [], shorts: [], shows: [], nav: [] };
+    const toSec = d => d.split(':').reduce((a, b) => a * 60 + (+b), 0);
+    const fmt = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    const cw = D.episodes.map((e, i) => ({ ...e, p: e.p || [0.45, 0.7, 0.2, 0.55][i % 4] }))
+      .filter(e => e.kind === 'حلقة كاملة')
+      .map(e => ({ ...e, pct: Math.round(e.p * 100) + '%', left: fmt(Math.round(toSec(e.dur) * (1 - e.p))) }));
+    return {
+      nav: D.nav, navShort: D.nav.slice(0, 5),
+      featured: D.episodes[0] || {}, eps3: D.episodes.slice(1, 4), e2: D.episodes[1] || {},
+      shorts: D.shorts, shorts4: D.shorts.slice(0, 4), shorts6: D.shorts.slice(0, 6),
+      shows: D.shows, shows5: D.shows.slice(0, 5), cw, cw4: cw.slice(0, 4),
+      today: [{ time: '18:00', name: 'نشرة المدن', note: 'يومياً' }, { time: '20:00', name: 'وجهًا لوجه', note: 'حلقة جديدة' }, { time: '21:30', name: 'شو رأيك؟', note: 'إعادة' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

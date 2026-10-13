@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0}a{color:#fff;text-decoration:none}a:hover{color:#F7C600}*{box-sizing:border-box}</style>
+</helmet>
+<div dir="ltr" onMouseMove="{{ wake }}" style="position:relative;width:100%;height:100%;min-height:390px;background:#000;overflow:hidden;font-family:'IBM Plex Sans Arabic',sans-serif;color:#fff;user-select:none">
+  <img src="{{ ep.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+  <div onClick="{{ togglePlay }}" style="position:absolute;inset:0;cursor:pointer;background:{{ shade }}"></div>
+
+  <sc-if value="{{ showUI }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0 0 auto 0;height:40%;background:linear-gradient(180deg,rgba(0,0,0,.75),transparent);pointer-events:none"></div>
+    <div style="position:absolute;inset:auto 0 0 0;height:45%;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);pointer-events:none"></div>
+
+    <sc-if value="{{ isD }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute;top:0;right:0;left:0;padding:28px 40px;display:flex;align-items:flex-start;gap:20px">
+        <a href="ShowPage.dc.html" style="width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.12);flex:none"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+        <div dir="rtl" style="display:flex;flex-direction:column;gap:4px"><span style="font:700 14px 'Noto Kufi Arabic';color:#F7C600">{{ showName }}</span><span style="font:800 26px/1.4 'Noto Kufi Arabic'">{{ ep.title }}</span><span style="font-size:14px;color:#C9D5E6">الموسم 3 · الحلقة {{ ep.num }} · {{ ep.dur }}</span></div>
+        <div style="margin-left:auto;display:flex;gap:10px">
+          <div onClick="{{ toggleList }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;cursor:pointer;background:rgba(255,255,255,.12);font:700 14px 'Noto Kufi Arabic'"><span style="font:700 18px/1 sans-serif;color:{{ listC }}">{{ listIcon }}</span>{{ listLabel }}</div>
+          <div onClick="{{ toggleLike }}" style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;cursor:pointer;background:rgba(255,255,255,.12);font:700 14px 'Noto Kufi Arabic'"><span style="font:700 18px/1 sans-serif;color:{{ likeC }}">{{ likeIcon }}</span>{{ likeLabel }}</div>
+          <div style="display:flex;align-items:center;gap:8px;height:44px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.12);font:700 14px 'Noto Kufi Arabic'"><span style="font:700 17px/1 sans-serif">⤴</span>مشاركة</div>
+        </div>
+      </div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:64px">
+        <div onClick="{{ back10 }}" style="position:relative;width:64px;height:64px;display:grid;place-items:center;cursor:pointer"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.3-5.7"></path><path d="M4 4v4h4"></path></svg><span style="position:absolute;font:700 13px sans-serif">10</span></div>
+        <div onClick="{{ togglePlay }}" style="width:96px;height:96px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;cursor:pointer;backdrop-filter:blur(6px)"><sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg></sc-if><sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="44" height="44" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l13-8z"></path></svg></sc-if></div>
+        <div onClick="{{ fwd10 }}" style="position:relative;width:64px;height:64px;display:grid;place-items:center;cursor:pointer"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"></path><path d="M20 4v4h-4"></path></svg><span style="position:absolute;font:700 13px sans-serif">10</span></div>
+      </div>
+      <sc-if value="{{ showSkip }}" hint-placeholder-val="{{ false }}"><div onClick="{{ skipIntro }}" style="position:absolute;right:40px;bottom:150px;height:48px;padding:0 24px;display:flex;align-items:center;border:1.5px solid rgba(255,255,255,.8);border-radius:6px;background:rgba(0,0,0,.4);cursor:pointer;font:700 15px 'Noto Kufi Arabic'">تخطي المقدمة</div></sc-if>
+      <div style="position:absolute;right:40px;left:40px;bottom:28px;display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:16px"><span style="font:600 14px sans-serif;min-width:52px">{{ cur }}</span>
+          <div onClick="{{ seek }}" onMouseMove="{{ hover }}" onMouseLeave="{{ unhover }}" style="position:relative;flex:1;height:22px;display:flex;align-items:center;cursor:pointer">
+            <div style="position:relative;width:100%;height:5px;border-radius:3px;background:rgba(255,255,255,.25)"><div style="position:absolute;top:0;bottom:0;left:0;border-radius:3px;background:rgba(255,255,255,.4);width:{{ buf }}"></div><div style="position:absolute;top:0;bottom:0;left:0;border-radius:3px;background:#F7C600;width:{{ pct }}"></div><div style="position:absolute;top:50%;width:16px;height:16px;border-radius:50%;background:#F7C600;transform:translate(-50%,-50%);left:{{ pct }}"></div></div>
+            <sc-if value="{{ hovOn }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;bottom:30px;transform:translateX(-50%);left:{{ hovPct }};display:flex;flex-direction:column;align-items:center;gap:6px;pointer-events:none"><div style="width:200px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;border:2px solid #fff"><img src="{{ ep.img }}" alt="" style="width:100%;height:100%;object-fit:cover;object-position:{{ hovPos }}"></div><span style="font:700 13px sans-serif;background:rgba(0,0,0,.7);padding:2px 8px;border-radius:4px">{{ hovTime }}</span></div></sc-if>
+          </div><span style="font:600 14px sans-serif;min-width:52px;text-align:right;color:#C9D5E6">-{{ left }}</span></div>
+        <div style="display:flex;align-items:center;gap:22px">
+          <div onClick="{{ togglePlay }}" style="cursor:pointer;display:grid;place-items:center;width:40px;height:40px"><sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg></sc-if><sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l13-8z"></path></svg></sc-if></div>
+          <div onClick="{{ toggleMute }}" style="display:flex;align-items:center;gap:10px;cursor:pointer"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5L6 9H3v6h3l5 4z"></path><sc-if value="{{ unmuted }}" hint-placeholder-val="{{ true }}"><path d="M15.5 8.5a5 5 0 0 1 0 7"></path><path d="M18.5 5.5a9 9 0 0 1 0 13"></path></sc-if><sc-if value="{{ muted }}" hint-placeholder-val="{{ false }}"><path d="M16 9l5 6M21 9l-5 6"></path></sc-if></svg><div style="position:relative;width:90px;height:4px;border-radius:2px;background:rgba(255,255,255,.3)"><div style="position:absolute;top:0;bottom:0;left:0;border-radius:2px;background:#fff;width:{{ volPct }}"></div></div></div>
+          <span style="font:700 15px 'Noto Kufi Arabic'">{{ showName }} <span style="font:500 14px 'IBM Plex Sans Arabic';color:#C9D5E6">· الحلقة {{ ep.num }}</span></span>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
+            <div onClick="{{ nextEp }}" style="display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:6px;cursor:pointer;font:700 14px 'Noto Kufi Arabic'"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l11-7z"></path><rect x="17.6" y="5" width="2.4" height="14" rx="1"></rect></svg>الحلقة التالية</div>
+            <div onClick="{{ openEps }}" style="display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:6px;cursor:pointer;font:700 14px 'Noto Kufi Arabic';background:{{ epsBg }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="8" width="14" height="12" rx="2"></rect><path d="M7 4h12a2 2 0 0 1 2 2v10"></path></svg>الحلقات</div>
+            <div onClick="{{ openSubs }}" style="display:flex;align-items:center;gap:8px;height:42px;padding:0 14px;border-radius:6px;cursor:pointer;font:700 14px 'Noto Kufi Arabic';background:{{ subsBg }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 12h4M13 12h4M7 15.5h10"></path></svg>الترجمة</div>
+            <div onClick="{{ openSet }}" style="display:grid;place-items:center;width:42px;height:42px;border-radius:6px;cursor:pointer;background:{{ setBg }}"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"></path></svg></div>
+            <div style="display:grid;place-items:center;width:42px;height:42px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"></path></svg></div>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isM }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;top:0;right:0;left:0;padding:16px 48px 0;display:flex;align-items:center;gap:12px">
+        <a href="ShowPage.dc.html" style="width:40px;height:40px;display:grid;place-items:center;flex:none"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></a>
+        <div dir="rtl" style="display:flex;flex-direction:column;min-width:0;align-items:flex-end"><span style="font:700 14px 'Noto Kufi Arabic';white-space:nowrap">{{ showName }} · الحلقة {{ ep.num }}</span><span style="font-size:12px;color:#C9D5E6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:420px">{{ ep.title }}</span></div>
+        <div style="margin-left:auto;display:flex;gap:4px">
+          <div onClick="{{ toggleList }}" style="width:44px;height:44px;display:grid;place-items:center;cursor:pointer;font:700 20px/1 sans-serif;color:{{ listC }}">{{ listIcon }}</div>
+          <div onClick="{{ toggleLike }}" style="width:44px;height:44px;display:grid;place-items:center;cursor:pointer;font:700 20px/1 sans-serif;color:{{ likeC }}">{{ likeIcon }}</div>
+          <div style="width:44px;height:44px;display:grid;place-items:center;font:700 19px/1 sans-serif">⤴</div>
+        </div>
+      </div>
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);display:flex;align-items:center;gap:56px">
+        <div onClick="{{ back10 }}" style="position:relative;width:52px;height:52px;display:grid;place-items:center;cursor:pointer"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.3-5.7"></path><path d="M4 4v4h4"></path></svg><span style="position:absolute;font:700 11px sans-serif">10</span></div>
+        <div onClick="{{ togglePlay }}" style="width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;cursor:pointer"><sc-if value="{{ playing }}" hint-placeholder-val="{{ true }}"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"></rect><rect x="14" y="4" width="4" height="16" rx="1"></rect></svg></sc-if><sc-if value="{{ paused }}" hint-placeholder-val="{{ false }}"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4v16l13-8z"></path></svg></sc-if></div>
+        <div onClick="{{ fwd10 }}" style="position:relative;width:52px;height:52px;display:grid;place-items:center;cursor:pointer"><svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M20 12a8 8 0 1 1-2.3-5.7"></path><path d="M20 4v4h-4"></path></svg><span style="position:absolute;font:700 11px sans-serif">10</span></div>
+      </div>
+      <sc-if value="{{ showSkip }}" hint-placeholder-val="{{ false }}"><div onClick="{{ skipIntro }}" style="position:absolute;right:48px;bottom:96px;height:40px;padding:0 16px;display:flex;align-items:center;border:1.5px solid rgba(255,255,255,.8);border-radius:6px;background:rgba(0,0,0,.4);cursor:pointer;font:700 13px 'Noto Kufi Arabic'">تخطي المقدمة</div></sc-if>
+      <div style="position:absolute;right:48px;left:48px;bottom:12px;display:flex;flex-direction:column;gap:4px">
+        <div style="display:flex;align-items:center;gap:12px"><div onClick="{{ seek }}" style="position:relative;flex:1;height:24px;display:flex;align-items:center;cursor:pointer"><div style="position:relative;width:100%;height:4px;border-radius:2px;background:rgba(255,255,255,.25)"><div style="position:absolute;top:0;bottom:0;left:0;border-radius:2px;background:rgba(255,255,255,.4);width:{{ buf }}"></div><div style="position:absolute;top:0;bottom:0;left:0;border-radius:2px;background:#F7C600;width:{{ pct }}"></div><div style="position:absolute;top:50%;width:14px;height:14px;border-radius:50%;background:#F7C600;transform:translate(-50%,-50%);left:{{ pct }}"></div></div></div><span style="font:600 12px sans-serif;color:#C9D5E6">-{{ left }}</span></div>
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div onClick="{{ openSet }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 6px;cursor:pointer;font:700 12px 'Noto Kufi Arabic'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"></path></svg><span dir="rtl">السرعة (<bdi>{{ speed }}</bdi>)</span></div>
+          <div onClick="{{ openEps }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 6px;cursor:pointer;font:700 12px 'Noto Kufi Arabic'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="8" width="14" height="12" rx="2"></rect><path d="M7 4h12a2 2 0 0 1 2 2v10"></path></svg>الحلقات</div>
+          <div onClick="{{ openSubs }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 6px;cursor:pointer;font:700 12px 'Noto Kufi Arabic'"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M7 12h4M13 12h4M7 15.5h10"></path></svg>الترجمة والصوت</div>
+          <div onClick="{{ nextEp }}" style="display:flex;align-items:center;gap:6px;height:44px;padding:0 6px;cursor:pointer;font:700 12px 'Noto Kufi Arabic'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M7 5v14l11-7z"></path><rect x="17.6" y="5" width="2.4" height="14" rx="1"></rect></svg>الحلقة التالية</div>
+        </div>
+      </div>
+    </sc-if>
+  </sc-if>
+
+  <sc-if value="{{ pEps }}" hint-placeholder-val="{{ false }}">
+    <div dir="rtl" style="position:absolute;top:0;bottom:0;left:0;width:min(440px,46%);background:rgba(7,14,31,.97);display:flex;flex-direction:column;z-index:5">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.1)"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:800 18px 'Noto Kufi Arabic'">الحلقات</span><span style="font-size:12px;color:#9FB2CC">{{ showName }} · الموسم 3 ▾</span></div><div onClick="{{ closeP }}" style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;cursor:pointer;font:400 22px/1 sans-serif">×</div></div>
+      <div style="flex:1;overflow-y:auto;padding:8px 12px 16px;display:flex;flex-direction:column;gap:6px"><sc-for list="{{ eps }}" as="e" hint-placeholder-count="5"><div onClick="{{ e.pick }}" style="display:flex;gap:12px;padding:8px;border-radius:8px;cursor:pointer;background:{{ e.bg }}"><div style="position:relative;width:132px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;flex:none"><img src="{{ e.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;bottom:6px;left:4px;background:rgba(0,0,0,.75);font:500 10px sans-serif;padding:1px 5px;border-radius:3px">{{ e.dur }}</span><div style="position:absolute;inset:auto 0 0 0;height:3px;background:rgba(255,255,255,.3)"><div style="height:100%;background:#F7C600;width:{{ e.pct }}"></div></div></div><div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font:700 11px 'Noto Kufi Arabic';color:{{ e.tagC }}">الحلقة {{ e.num }} {{ e.tag }}</span><span style="font:600 13px/1.5 'IBM Plex Sans Arabic';display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ e.title }}</span></div></div></sc-for></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ pSet }}" hint-placeholder-val="{{ false }}">
+    <div dir="rtl" style="position:absolute;right:{{ popL }};bottom:{{ popB }};width:340px;max-height:calc(100% - 40px);overflow-y:auto;background:rgba(7,14,31,.97);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px;z-index:5">
+      <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:800 16px 'Noto Kufi Arabic'">{{ setTitle }}</span><div onClick="{{ closeP }}" style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.1);display:grid;place-items:center;cursor:pointer;font:400 18px/1 sans-serif">×</div></div>
+      <sc-for list="{{ setGroups }}" as="g" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:8px"><span style="font:700 12px 'Noto Kufi Arabic';color:#9FB2CC">{{ g.label }}</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ g.opts }}" as="o" hint-placeholder-count="4"><div onClick="{{ o.on }}" style="padding:7px 12px;border-radius:999px;cursor:pointer;font:700 12px 'Noto Kufi Arabic';background:{{ o.bg }};color:{{ o.fg }}">{{ o.label }}</div></sc-for></div></div></sc-for>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1440px&quot;,&quot;height&quot;:&quot;810px&quot;},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { playing: true, t: 45, panel: null, ui: true, muted: false, speed: '1x', q: 'تلقائي', sub: 'العربية', audio: 'العربية', liked: false, inList: false, epIdx: 1, hov: null };
+  componentDidMount() { this.iv = setInterval(() => { if (this.state.playing && !this.state.panel) this.setState(s => ({ t: Math.min(s.t + 1, this.total() - 1) })); }, 1000); }
+  componentWillUnmount() { clearInterval(this.iv); }
+  eps() {
+    const D = window.PLUS_DATA || { episodes: [], H: [] };
+    const base = D.episodes.filter(e => e.kind === 'حلقة كاملة');
+    return [21, 20, 19, 18, 17, 16, 15].map((num, i) => { const b = base[i % (base.length || 1)] || {}; return { ...b, num, img: b.img || (D.H || [])[i], title: num === 21 ? 'الحلقة المقبلة · الخميس 8 تشرين الأول' : b.title, dur: num === 21 ? '—' : b.dur, soon: num === 21, p: { 20: 0.62, 19: 1, 18: 0.3, 17: 1 }[num] || 0 }; });
+  }
+  total() { const e = this.eps()[this.state.epIdx] || {}; return (e.dur || '37:32').split(':').reduce((a, b) => a * 60 + (+b), 0) || 2252; }
+  renderVals() {
+    const m = !!this.props.mobile, s = this.state, list = this.eps(), ep = list[s.epIdx] || {}, T = this.total();
+    const f = x => { x = Math.max(0, Math.round(x)); const h = Math.floor(x / 3600), mm = Math.floor(x % 3600 / 60), ss = String(x % 60).padStart(2, '0'); return h ? h + ':' + String(mm).padStart(2, '0') + ':' + ss : mm + ':' + ss; };
+    const ratio = e => { const r = e.currentTarget.getBoundingClientRect(); return Math.min(1, Math.max(0, (e.clientX - r.left) / r.width)); };
+    const P = (k) => () => this.setState(st => ({ panel: st.panel === k ? null : k }));
+    const opt = (key, arr) => arr.map(v => ({ label: v, on: () => this.setState({ [key]: v }), bg: s[key] === v ? '#F7C600' : 'rgba(255,255,255,.1)', fg: s[key] === v ? '#071C3D' : '#fff' }));
+    const isSubs = s.panel === 'subs';
+    const setGroups = isSubs
+      ? [{ label: 'الترجمة', opts: opt('sub', ['إيقاف', 'العربية', 'English', 'Français']) }, { label: 'الصوت', opts: opt('audio', ['العربية', 'الوصف الصوتي']) }]
+      : [{ label: 'سرعة التشغيل', opts: opt('speed', ['0.75x', '1x', '1.25x', '1.5x', '2x']) }, { label: 'الجودة', opts: opt('q', ['تلقائي', '1080p', '720p', '480p']) }];
+    const hp = s.hov == null ? 0 : s.hov;
+    return {
+      isD: !m, isM: m, ep, showName: 'وجهًا لوجه',
+      playing: s.playing, paused: !s.playing, showUI: s.ui || !s.playing || !!s.panel,
+      shade: s.playing ? 'rgba(0,0,0,.15)' : 'rgba(0,0,0,.45)',
+      cur: f(s.t), left: f(T - s.t), pct: (s.t / T * 100).toFixed(2) + '%', buf: Math.min(100, s.t / T * 100 + 8).toFixed(2) + '%',
+      seek: e => this.setState({ t: ratio(e) * T }), hover: e => this.setState({ hov: ratio(e) }), unhover: () => this.setState({ hov: null }),
+      hovOn: s.hov != null, hovPct: (hp * 100).toFixed(2) + '%', hovTime: f(hp * T), hovPos: Math.round(hp * 100) + '% center',
+      togglePlay: () => this.setState(st => ({ playing: !st.playing, ui: true })), wake: () => { if (!this.state.ui) this.setState({ ui: true }); },
+      back10: () => this.setState(st => ({ t: Math.max(0, st.t - 10) })), fwd10: () => this.setState(st => ({ t: Math.min(T - 1, st.t + 10) })),
+      showSkip: s.t < 90, skipIntro: () => this.setState({ t: 95 }),
+      toggleMute: () => this.setState(st => ({ muted: !st.muted })), muted: s.muted, unmuted: !s.muted, volPct: s.muted ? '0%' : '70%',
+      speed: s.speed,
+      nextEp: () => this.setState(st => ({ epIdx: Math.min(list.length - 1, st.epIdx + 1), t: 0 })),
+      openEps: P('eps'), openSet: P('set'), openSubs: P('subs'), closeP: () => this.setState({ panel: null }),
+      pEps: s.panel === 'eps', pSet: s.panel === 'set' || isSubs, setTitle: isSubs ? 'الترجمة والصوت' : 'الإعدادات', setGroups,
+      popL: m ? '48px' : '40px', popB: m ? '64px' : '110px',
+      epsBg: s.panel === 'eps' ? 'rgba(255,255,255,.16)' : 'transparent', subsBg: isSubs ? 'rgba(255,255,255,.16)' : 'transparent', setBg: s.panel === 'set' ? 'rgba(255,255,255,.16)' : 'transparent',
+      eps: list.map((e, i) => ({ ...e, pct: Math.round((i === s.epIdx ? s.t / T : e.p) * 100) + '%', bg: i === s.epIdx ? 'rgba(247,198,0,.14)' : 'transparent', tag: e.soon ? '· قريباً' : i === s.epIdx ? '· يُعرض الآن' : '', tagC: e.soon ? '#3F97CF' : i === s.epIdx ? '#F7C600' : '#9FB2CC', pick: () => { if (!e.soon) this.setState({ epIdx: i, t: 0, panel: null }); } })),
+      toggleLike: () => this.setState(st => ({ liked: !st.liked })), toggleList: () => this.setState(st => ({ inList: !st.inList })),
+      likeIcon: s.liked ? '♥' : '♡', likeC: s.liked ? '#F7C600' : '#fff', likeLabel: s.liked ? 'أعجبني' : 'إعجاب',
+      listIcon: s.inList ? '✓' : '+', listC: s.inList ? '#F7C600' : '#fff', listLabel: s.inList ? 'في قائمتي' : 'قائمتي'
+    };
+  }
+}
+</script>
+</body>
+</html>

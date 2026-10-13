@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="" screen="V" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<section dir="rtl" style="padding:64px;display:flex;flex-direction:column;gap:28px">
+  <div style="display:flex;flex-direction:column;gap:8px;max-width:1100px">
+    <div style="font:700 13px 'Noto Kufi Arabic';color:#3F97CF">/video/… · صفحة الفيديو</div>
+    <h1 style="margin:0;font:800 36px/1.3 'Noto Kufi Arabic';color:#0A2B5C">المشغّل بملء الشاشة</h1>
+  </div>
+  <div style="display:flex;gap:48px;align-items:flex-start">
+    <div data-screen-label="Player Mobile Landscape" style="flex:none;padding:10px;background:#0B0F17;border-radius:46px;box-shadow:0 20px 50px rgba(10,43,92,.25)"><div style="width:844px;height:390px;border-radius:36px;overflow:hidden"><dc-import name="FullPlayer" mobile="{{ true }}" style="width:844px;height:390px" hint-size="844px,390px"></dc-import></div></div>
+    <div data-screen-label="Player Desktop" style="flex:none;width:1440px;height:810px;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.25);color:#121417"><dc-import name="FullPlayer" mobile="{{ false }}" style="width:1440px;height:810px" hint-size="1440px,810px"></dc-import></div>
+  </div>
+</section>
+</x-dc>
+</body>
+</html>

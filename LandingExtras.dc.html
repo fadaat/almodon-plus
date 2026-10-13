@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+</helmet>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <div dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417;display:flex;flex-direction:column">
+    <div style="padding:20px 16px;border-top:8px solid #F5F6F8;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:4px;height:18px;background:#F7C600;border-radius:2px"></span><span style="font:700 16px 'Noto Kufi Arabic';color:#0A2B5C">الأكثر مشاهدة هذا الأسبوع</span></div>
+      <sc-for list="{{ top }}" as="e" hint-placeholder-count="5"><div style="display:flex;gap:10px;align-items:center"><b style="font:800 26px sans-serif;color:#D5DAE1;width:24px;text-align:center">{{ e.rank }}</b><div style="position:relative;width:104px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;flex:none"><img src="{{ e.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.75);color:#fff;font:500 9px sans-serif;padding:1px 4px;border-radius:3px">{{ e.dur }}</span></div><div style="display:flex;flex-direction:column;gap:2px"><span style="font:700 10px 'Noto Kufi Arabic';color:#3F97CF">{{ e.show }}</span><span style="font:600 13px/1.5 'IBM Plex Sans Arabic'">{{ e.title }}</span><span style="font-size:10px;color:#5E6673">{{ e.views }} مشاهدة</span></div></div></sc-for>
+    </div>
+    <div style="padding:20px 16px;border-top:8px solid #F5F6F8;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:8px"><span style="width:4px;height:18px;background:#3F97CF;border-radius:2px"></span><span style="font:700 16px 'Noto Kufi Arabic';color:#0A2B5C">تصفّح حسب الموضوع</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><sc-for list="{{ topics }}" as="t" hint-placeholder-count="6"><div style="position:relative;height:72px;border-radius:10px;overflow:hidden;background:#0A2B5C"><img src="{{ t.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.45"><div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px"><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">{{ t.name }}</b><span style="font-size:10px;color:#C9D5E6">{{ t.n }} فيديو</span></div></div></sc-for></div>
+    </div>
+    <div style="padding:20px 0;border-top:8px solid #F5F6F8;display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:8px;padding:0 16px"><span style="width:4px;height:18px;background:#0A2B5C;border-radius:2px"></span><span style="font:700 16px 'Noto Kufi Arabic';color:#0A2B5C">المقدّمون</span></div>
+      <div style="display:flex;gap:16px;padding:0 16px;overflow:hidden"><sc-for list="{{ hosts }}" as="p" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;align-items:center;gap:6px;width:76px;flex:none;text-align:center"><img src="{{ p.img }}" alt="" style="width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #F7C600"><b style="font:700 11px/1.4 'Noto Kufi Arabic'">{{ p.name }}</b><span style="font-size:10px;color:#5E6673">{{ p.show }}</span></div></sc-for></div>
+    </div>
+    <div style="margin:0 16px 20px;background:#071C3D;border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px">
+      <b style="font:700 15px 'Noto Kufi Arabic';color:#fff">لا تفوّت العرض الأول</b>
+      <span style="font-size:12px;line-height:1.7;color:#C9D5E6">نرسل لك تنبيهاً عند إطلاق برنامج جديد أو حلقة من برامجك المفضلة.</span>
+      <div style="display:flex;justify-content:center;align-items:center;height:42px;border-radius:8px;background:#F7C600;color:#071C3D;font:700 13px 'Noto Kufi Arabic'">فعّل التنبيهات</div>
+    </div>
+  </div>
+</sc-if>
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <div dir="rtl" style="font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417;padding:40px 120px;display:flex;flex-direction:column;gap:40px">
+    <div style="display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:40px">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#F7C600;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">الأكثر مشاهدة هذا الأسبوع</span></div>
+        <sc-for list="{{ top }}" as="e" hint-placeholder-count="5"><div style="display:flex;gap:14px;align-items:center;padding-bottom:12px;border-bottom:1px solid #EEF0F3"><b style="font:800 34px sans-serif;color:#D5DAE1;width:32px;text-align:center">{{ e.rank }}</b><div style="position:relative;width:150px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;flex:none"><img src="{{ e.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.75);color:#fff;font:500 10px sans-serif;padding:1px 5px;border-radius:3px">{{ e.dur }}</span></div><div style="display:flex;flex-direction:column;gap:3px;flex:1"><span style="font:700 11px 'Noto Kufi Arabic';color:#3F97CF">{{ e.show }} · {{ e.kind }}</span><span style="font:600 15px/1.55 'IBM Plex Sans Arabic'">{{ e.title }}</span></div><span style="font-size:12px;color:#5E6673;white-space:nowrap">{{ e.views }} مشاهدة</span></div></sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#3F97CF;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">تصفّح حسب الموضوع</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px"><sc-for list="{{ topics }}" as="t" hint-placeholder-count="6"><div style="position:relative;height:104px;border-radius:12px;overflow:hidden;background:#0A2B5C"><img src="{{ t.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.45"><div style="position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;padding:12px 14px"><b style="font:700 18px 'Noto Kufi Arabic';color:#fff">{{ t.name }}</b><span style="font-size:12px;color:#C9D5E6">{{ t.n }} فيديو</span></div></div></sc-for></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:40px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#0A2B5C;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">المقدّمون</span></div>
+        <div style="display:flex;gap:28px"><sc-for list="{{ hosts }}" as="p" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;align-items:center;gap:8px;width:120px;text-align:center"><img src="{{ p.img }}" alt="" style="width:96px;height:96px;border-radius:50%;object-fit:cover;border:3px solid #F7C600"><b style="font:700 14px 'Noto Kufi Arabic'">{{ p.name }}</b><span style="font-size:12px;color:#5E6673">{{ p.show }}</span></div></sc-for></div>
+      </div>
+      <div style="background:#071C3D;border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px">
+        <b style="font:700 20px 'Noto Kufi Arabic';color:#fff">لا تفوّت العرض الأول</b>
+        <span style="font-size:14px;line-height:1.8;color:#C9D5E6">نرسل لك تنبيهاً عند إطلاق برنامج جديد أو حلقة من برامجك المفضلة.</span>
+        <div style="display:flex;gap:8px"><div style="flex:1;height:44px;border-radius:8px;background:#fff;color:#8A93A0;font-size:13px;display:flex;align-items:center;padding:0 12px">بريدك الإلكتروني</div><div style="display:flex;align-items:center;height:44px;padding:0 18px;border-radius:8px;background:#F7C600;color:#071C3D;font:700 14px 'Noto Kufi Arabic'">فعّل التنبيهات</div></div>
+      </div>
+    </div>
+  </div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1440px&quot;,&quot;height&quot;:&quot;900px&quot;},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const D = window.PLUS_DATA || { episodes: [], H: [], V: [], shows: [] };
+    const m = !!this.props.mobile && this.props.mobile !== 'false';
+    const top = [0, 3, 5, 2, 7].map((i, k) => D.episodes[i] && ({ ...D.episodes[i], rank: k + 1 })).filter(Boolean);
+    const topics = [['سياسة', 84], ['مجتمع', 46], ['ثقافة', 31], ['تاريخ', 22], ['حوارات', 64], ['وثائقي', 12]].map(([n, c], i) => ({ name: n, n: c, img: D.H[(i * 3 + 1) % D.H.length] }));
+    const hosts = [['شيرين موسى', 'وجهًا لوجه', D.V[1]], ['شربل عبود', 'وجهًا لوجه', D.V[2]], ['منير الربيع', 'بين سطرين · قريباً', D.V[4]], ['فريق المدن', 'نشرة المدن', D.V[0]]].map(([n, s, img]) => ({ name: n, show: s, img }));
+    return { isMobile: m, isDesktop: !m, top, topics, hosts };
+  }
+}
+</script>
+</body>
+</html>

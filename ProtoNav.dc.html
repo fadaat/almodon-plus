@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&display=swap" rel="stylesheet">
+<style>body{margin:0}a{text-decoration:none}</style>
+</helmet>
+<sc-if value="{{ show }}" hint-placeholder-val="{{ true }}">
+<div dir="rtl" style="position:sticky;top:0;z-index:50;background:#0A2B5C;display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;padding:0 24px;min-height:56px;box-shadow:0 4px 16px rgba(10,43,92,.25);margin-bottom:32px">
+  <div style="display:flex;flex-wrap:wrap;column-gap:18px;min-height:52px"><sc-for list="{{ screens }}" as="s" hint-placeholder-count="5"><a href="{{ s.href }}" style="display:flex;align-items:center;white-space:nowrap;font:700 14px 'Noto Kufi Arabic';color:{{ s.fg }};border-bottom:3px solid {{ s.bd }};padding-top:3px">{{ s.label }}</a></sc-for></div>
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:8px;margin-right:auto"><sc-for list="{{ homeOpts }}" as="h" hint-placeholder-count="2"><a href="{{ h.href }}" style="display:flex;align-items:center;gap:6px;white-space:nowrap;height:32px;padding:0 14px;border-radius:999px;font:700 13px 'Noto Kufi Arabic';background:{{ h.bg }};color:{{ h.fg }};border:1px solid {{ h.bd }}">{{ h.label }}</a></sc-for></div></sc-if>
+</div>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1440px&quot;,&quot;height&quot;:&quot;80px&quot;},&quot;opt&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a&quot;,&quot;b&quot;,&quot;c&quot;],&quot;default&quot;:&quot;a&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;screen&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;H&quot;,&quot;P&quot;,&quot;S&quot;,&quot;X&quot;,&quot;V&quot;],&quot;default&quot;:&quot;H&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;homev&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;1&quot;,&quot;2&quot;,&quot;3&quot;],&quot;default&quot;:&quot;1&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;hide&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { inOpts: false };
+  componentDidMount() { if (document.querySelector('[data-options-root]')) this.setState({ inOpts: true }); }
+  renderVals() {
+    let o = this.props.opt || '';
+    if (o) { try { localStorage.setItem('protoOpt', o); } catch (e) {} } else { try { o = 'a'; } catch (e) { o = 'a'; } }
+    const sc = this.props.screen || 'H', U = o.toUpperCase();
+    const file = (k, x) => ({ H: 'Home' + x, P: 'Programs' + x, S: 'Shorts' + x, X: 'ShowPage', V: 'VideoPage' }[k] + '.dc.html');
+    const names = { a: 'الشريط الداكن', b: 'الشورتس أولاً', c: 'البرنامج أولاً' };
+    const opts = ['a'].map((k, i) => { const a = k === o; const tgt = sc === 'X' || sc === 'V' ? 'H' : sc; return { id: i + 1, name: names[k], href: file(tgt, k.toUpperCase()), bg: a ? '#fff' : 'transparent', fg: a ? '#0A2B5C' : '#C9D5E6', nb: a ? '#F7C600' : 'rgba(255,255,255,.12)', nf: a ? '#071C3D' : '#fff' }; });
+    const screens = [['H', 'الرئيسية'], ['P', 'صفحة البرامج'], ['S', 'شورتس'], ['X', 'صفحة البرنامج'], ['V', 'صفحة الفيديو']].map(([k, l]) => { const a = k === sc; return { label: l, href: file(k, U), fg: a ? '#fff' : '#9FB2CC', bd: a ? '#F7C600' : 'transparent' }; });
+    const hv = this.props.homev || '1';
+    const homeOpts = [['1', 'الخيار 1', 'HomeA.dc.html'], ['2', 'الخيار 2', 'HomeA v2.dc.html'], ['3', 'الخيار 3', 'HomeA v3.dc.html'], ['4', 'الخيار 4', 'HomeA v4.dc.html']].map(([k, l, f]) => { const a = k === hv; return { label: l, href: f, bg: a ? '#F7C600' : 'transparent', fg: a ? '#071C3D' : '#C9D5E6', bd: a ? '#F7C600' : 'rgba(255,255,255,.25)' }; });
+    return { show: !this.props.hide && !this.state.inOpts, opts, screens, isHome: sc === 'H', homeOpts };
+  }
+}
+</script>
+</body>
+</html>

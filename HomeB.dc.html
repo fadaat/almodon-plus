@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="b" screen="H" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<div dir="rtl" style="display:flex;justify-content:center"><div style="display:flex;gap:40px;align-items:flex-start">
+        <div data-screen-label="1b Mobile" style="width:390px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none">
+          <dc-import name="NewsBlocks" part="header" mobile="{{ true }}" hint-size="100%,70px"></dc-import>
+          <div style="display:flex;flex-direction:column;gap:12px;padding:16px 0;border-bottom:8px solid #F5F6F8">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 16px"><div style="display:flex;align-items:center;gap:8px"><span style="width:4px;height:18px;background:#F7C600;border-radius:2px"></span><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C">شورتس المدن</span></div><a href="#" style="font:600 13px 'Noto Kufi Arabic'">المزيد ‹</a></div>
+            <div style="display:flex;gap:10px;padding:0 16px;overflow:hidden">
+              <sc-for list="{{ shorts }}" as="s" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:6px;width:128px;flex:none">
+                  <div style="position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;background:#0A2B5C;outline:2px solid #F7C600;outline-offset:2px"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font:500 10px sans-serif;padding:1px 5px;border-radius:3px">{{ s.dur }}</span><span style="position:absolute;bottom:6px;right:6px;color:#fff;font:600 10px 'IBM Plex Sans Arabic';text-shadow:0 1px 3px #000">▶ {{ s.views }}</span></div>
+                  <div style="font:600 12px/1.5 'IBM Plex Sans Arabic';color:#121417">{{ s.title }}<br><span style="font-size:10px;font-weight:500;opacity:.85">{{ s.meta }}</span></div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:16px;display:flex;flex-direction:column;gap:10px;border-bottom:8px solid #F5F6F8">
+            <img src="https://assets.almodon.com/styles/medium_305x175/public/72AFB488-9476-4709-9CC2-93977EF9CE9E.jpg.webp?itok=Jsn_72aL" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px">
+            <div style="display:flex;flex-direction:column;gap:4px"><span style="font:700 12px 'Noto Kufi Arabic';color:#3F97CF">اقتصاد</span><span style="font:700 19px/1.55 'Noto Kufi Arabic';color:#121417">النفط والذهب يتراجعان بفعل تحسن الإمدادات وارتفاع الدولار</span><span style="font-size:12px;color:#5E6673">المدن - اقتصاد · أمس</span></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;padding:16px 0;border-bottom:8px solid #F5F6F8">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 16px"><div style="display:flex;align-items:center;gap:8px"><span style="width:4px;height:18px;background:#0A2B5C;border-radius:2px"></span><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C">{{ brand }}</span></div><a href="#" style="font:600 13px 'Noto Kufi Arabic'">كل البرامج ‹</a></div>
+            <div style="display:flex;gap:10px;padding:0 16px;overflow:hidden"><sc-for list="{{ shows }}" as="sh" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:6px;width:136px;flex:none"><div style="position:relative;aspect-ratio:3/4;border-radius:10px;overflow:hidden;background:#0A2B5C"><img src="{{ sh.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.85"><div style="position:absolute;inset:0;background:linear-gradient(0deg,#071C3D 10%,transparent 65%)"></div><span style="position:absolute;top:8px;right:8px;background:{{ sh.badgeBg }};color:{{ sh.badgeFg }};font:700 10px 'Noto Kufi Arabic';padding:2px 6px;border-radius:3px">{{ sh.badge }}</span><div style="position:absolute;bottom:10px;right:10px;left:10px;font:800 15px/1.4 'Noto Kufi Arabic';color:#fff">{{ sh.name }}</div></div><span style="font-size:11px;color:#5E6673">{{ sh.type }} · {{ sh.epsLabel }}</span><span style="font-size:11px;color:#3F97CF;font-weight:600">{{ sh.schedule }}</span></div></sc-for></div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px;padding:16px 0">
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 16px"><div style="display:flex;align-items:center;gap:8px"><span style="width:4px;height:18px;background:#3F97CF;border-radius:2px"></span><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C">تابع المشاهدة</span></div><a href="#" style="font:600 13px 'Noto Kufi Arabic'">السجل ‹</a></div>
+            <div style="display:flex;gap:10px;padding:0 16px;overflow:hidden">
+              <sc-for list="{{ cw }}" as="e" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column;gap:6px;width:230px;flex:none">
+                  <div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden"><img src="{{ e.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:auto 0 0 0;height:4px;background:rgba(255,255,255,.4)"><div style="height:100%;background:#F7C600;width:{{ e.pct }}"></div></div><span style="position:absolute;bottom:10px;left:6px;background:rgba(0,0,0,.75);color:#fff;font:500 10px sans-serif;padding:1px 5px;border-radius:3px">متبقٍ {{ e.left }}</span></div>
+                  <div style="font:600 11px 'Noto Kufi Arabic';color:#3F97CF">{{ e.show }}</div>
+                  <div style="font:600 13px/1.5 'IBM Plex Sans Arabic'">{{ e.title }}</div><span style="font-size:11px;color:#5E6673">{{ e.meta }}</span>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="padding:0 16px 20px"><div style="display:flex;align-items:center;justify-content:space-between;background:#0A2B5C;border-radius:10px;padding:14px 16px"><div style="display:flex;flex-direction:column;gap:2px"><span style="font:700 15px 'Noto Kufi Arabic';color:#fff">برامج المدن</span><span style="font-size:12px;color:#B9C6DA">حلقات كاملة، مقاطع، وشورتس</span></div><span style="background:#F7C600;color:#071C3D;font:700 13px 'Noto Kufi Arabic';padding:8px 12px;border-radius:6px">تصفّح</span></div></div>
+        <dc-import name="Footer" mobile="{{ true }}" brand="{{ brand }}" hint-size="100%,520px"></dc-import></div>
+        <div data-screen-label="1b Desktop" style="width:1440px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none">
+          <dc-import name="NewsBlocks" part="header" mobile="{{ false }}" hint-size="100%,170px"></dc-import>
+          <div style="padding:28px 120px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:28px">
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#F7C600;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">شورتس المدن</span></div><a href="#" style="font:600 14px 'Noto Kufi Arabic'">المزيد ‹</a></div>
+              <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px">
+                <sc-for list="{{ shorts6 }}" as="s" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:8px"><div style="position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.6);color:#fff;font:500 11px sans-serif;padding:1px 6px;border-radius:3px">{{ s.dur }}</span></div><div style="font:600 14px/1.5 'IBM Plex Sans Arabic'">{{ s.title }}<br><span style="font-size:10px;font-weight:500;opacity:.85">{{ s.meta }}</span></div></div></sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:12px"><div style="font:700 18px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:2px solid #0A2B5C;padding-bottom:6px;align-self:flex-start">الأكثر قراءة</div><div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:10px;border-bottom:1px solid #EEF0F3"><b style="font:800 22px sans-serif;color:#3F97CF;width:22px">1</b><div style="display:flex;flex-direction:column;gap:3px"><span style="font:700 14px/1.55 'Noto Kufi Arabic'">غارة على المنصوري.. وعون للجنوبيين: الدولة هي سندكم</span><span style="font-size:11px;color:#5E6673">المدن - سياسة · منذ ساعة</span></div></div><div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:10px;border-bottom:1px solid #EEF0F3"><b style="font:800 22px sans-serif;color:#3F97CF;width:22px">2</b><div style="display:flex;flex-direction:column;gap:3px"><span style="font:700 14px/1.55 'Noto Kufi Arabic'">ترامب يجدد تهديده لإيران.. وتعطل شبه كلي للملاحة في هرمز</span><span style="font-size:11px;color:#5E6673">المدن - عرب وعالم · منذ ساعتين</span></div></div><div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:10px;border-bottom:1px solid #EEF0F3"><b style="font:800 22px sans-serif;color:#3F97CF;width:22px">3</b><div style="display:flex;flex-direction:column;gap:3px"><span style="font:700 14px/1.55 'Noto Kufi Arabic'">سلام: انتظار التسوية ليس خياراً ونريد دولة قوية</span><span style="font-size:11px;color:#5E6673">المدن - سياسة · منذ 3 ساعات</span></div></div><div style="display:flex;gap:10px;align-items:flex-start;padding-bottom:10px;border-bottom:1px solid #EEF0F3"><b style="font:800 22px sans-serif;color:#3F97CF;width:22px">4</b><div style="display:flex;flex-direction:column;gap:3px"><span style="font:700 14px/1.55 'Noto Kufi Arabic'">المعارضة الشيعية تكثّف تحركاتها: جسّ نبض أم بداية مسار جديد؟</span><span style="font-size:11px;color:#5E6673">إبراهيم الرز · منذ 4 ساعات</span></div></div></div>
+          </div>
+          <div style="padding:0 120px 28px;display:grid;grid-template-columns:2fr 1fr 1fr;gap:20px"><div style="display:flex;flex-direction:column;gap:8px"><img src="https://assets.almodon.com/styles/medium_340x195/public/2026-03/image-1772628871.webp?h=06ac0d8c&itok=MjOFW3_C" alt="" style="display:block;width:100%;aspect-ratio:16/8;object-fit:cover;border-radius:6px"><div style="display:flex;flex-direction:column;gap:4px"><span style="font:700 12px 'Noto Kufi Arabic';color:#3F97CF">اقتصاد</span><span style="font:700 19px/1.55 'Noto Kufi Arabic';color:#121417">القروض السكنية: وزراء أصرّوا على شطبها والحكومة تقلّصها</span><span style="font-size:12px;color:#5E6673">عزة الحاج حسن · منذ 5 ساعات</span></div></div><div style="display:flex;flex-direction:column;gap:8px"><img src="https://assets.almodon.com/styles/medium_340x195/public/2026-01/image-1767952336.jpg.webp?itok=Kq38xm7K" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px"><div style="display:flex;flex-direction:column;gap:4px"><span style="font:700 11px 'Noto Kufi Arabic';color:#3F97CF">محطات</span><span style="font:700 14px/1.55 'Noto Kufi Arabic';color:#121417">بيروت "التي لا تنام" مدينة متهالكة: خدمات تتعثر وأبنية مهددة</span><span style="font-size:11px;color:#5E6673">سامر الحلبي · منذ 6 ساعات</span></div></div><div style="display:flex;flex-direction:column;gap:8px"><img src="https://assets.almodon.com/styles/medium_340x195/public/2026-10/image-1790926148.png.webp?itok=i7iYWhZl" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px"><div style="display:flex;flex-direction:column;gap:4px"><span style="font:700 11px 'Noto Kufi Arabic';color:#3F97CF">عرب وعالم</span><span style="font:700 14px/1.55 'Noto Kufi Arabic';color:#121417">إدلب: انفجارات داخل مطار تفتناز العسكري الذي يضم قوات تركية</span><span style="font-size:11px;color:#5E6673">المدن - عرب وعالم · منذ 7 ساعات</span></div></div></div>
+          <div style="padding:0 120px 32px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#0A2B5C;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">{{ brand }}</span></div><div style="display:flex;align-items:center;gap:8px"><span style="width:36px;height:36px;border-radius:50%;border:1px solid #D5DAE1;display:grid;place-items:center;color:#0A2B5C">›</span><span style="width:36px;height:36px;border-radius:50%;background:#0A2B5C;color:#fff;display:grid;place-items:center">‹</span><a href="#" style="font:600 14px 'Noto Kufi Arabic';margin-right:8px">كل البرامج ‹</a></div></div>
+            <div style="position:relative;overflow:hidden"><div style="display:flex;gap:16px"><sc-for list="{{ shows }}" as="sh" hint-placeholder-count="6"><div style="display:flex;flex-direction:column;gap:8px;width:196px;flex:none"><div style="position:relative;aspect-ratio:3/4;border-radius:12px;overflow:hidden;background:#0A2B5C"><img src="{{ sh.img }}" alt="" style="width:100%;height:100%;object-fit:cover;opacity:.85"><div style="position:absolute;inset:0;background:linear-gradient(0deg,#071C3D 10%,transparent 65%)"></div><span style="position:absolute;top:10px;right:10px;background:{{ sh.badgeBg }};color:{{ sh.badgeFg }};font:700 11px 'Noto Kufi Arabic';padding:2px 7px;border-radius:3px">{{ sh.badge }}</span><div style="position:absolute;bottom:12px;right:12px;left:12px;display:flex;flex-direction:column;gap:2px"><span style="font:800 18px/1.4 'Noto Kufi Arabic';color:#fff">{{ sh.name }}</span><span style="font-size:12px;color:#C9D5E6">{{ sh.host }}</span></div></div><span style="font-size:12px;color:#5E6673">{{ sh.type }} · {{ sh.epsLabel }}</span><span style="font-size:12px;color:#3F97CF;font-weight:600">{{ sh.schedule }}</span></div></sc-for></div><div style="position:absolute;inset:0 auto 0 0;width:80px;background:linear-gradient(90deg,#fff,rgba(255,255,255,0))"></div></div>
+          </div>
+          <div style="margin:0 120px 32px;padding:24px;background:#F5F6F8;border-radius:12px;display:flex;flex-direction:column;gap:16px">
+            <div style="display:flex;align-items:center;justify-content:space-between"><div style="display:flex;align-items:center;gap:10px"><span style="width:5px;height:22px;background:#3F97CF;border-radius:2px"></span><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C">تابع المشاهدة</span></div><div style="padding:9px 16px;background:#0A2B5C;border-radius:6px;color:#fff;font:700 14px 'Noto Kufi Arabic'">كل البرامج</div></div>
+            <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px">
+              <sc-for list="{{ cw4 }}" as="e" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:6px"><div style="position:relative;aspect-ratio:16/9;border-radius:8px;overflow:hidden"><img src="{{ e.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:auto 0 0 0;height:4px;background:rgba(255,255,255,.4)"><div style="height:100%;background:#F7C600;width:{{ e.pct }}"></div></div></div><div style="font:600 12px 'Noto Kufi Arabic';color:#3F97CF">{{ e.show }} · {{ e.kind }}</div><div style="font:600 15px/1.55 'IBM Plex Sans Arabic'">{{ e.title }}</div><span style="font-size:11px;color:#5E6673">{{ e.meta }}</span></div></sc-for>
+            </div>
+          </div>
+        <dc-import name="Footer" mobile="{{ false }}" brand="{{ brand }}" hint-size="100%,300px"></dc-import></div>
+      </div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return Object.assign({ brand: this.props.brand ?? 'برامج المدن' }, this._rv()); }
+  _rv() {
+    const D = window.PLUS_DATA || { episodes: [], shorts: [], shows: [], nav: [] };
+    const toSec = d => d.split(':').reduce((a, b) => a * 60 + (+b), 0);
+    const fmt = s => Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
+    const cw = D.episodes.map((e, i) => ({ ...e, p: e.p || [0.45, 0.7, 0.2, 0.55][i % 4] }))
+      .filter(e => e.kind === 'حلقة كاملة')
+      .map(e => ({ ...e, pct: Math.round(e.p * 100) + '%', left: fmt(Math.round(toSec(e.dur) * (1 - e.p))) }));
+    return {
+      nav: D.nav, navShort: D.nav.slice(0, 5),
+      featured: D.episodes[0] || {}, eps3: D.episodes.slice(1, 4), e2: D.episodes[1] || {},
+      shorts: D.shorts, shorts4: D.shorts.slice(0, 4), shorts6: D.shorts.slice(0, 6),
+      shows: D.shows, shows5: D.shows.slice(0, 5), cw, cw4: cw.slice(0, 4),
+      today: [{ time: '18:00', name: 'نشرة المدن', note: 'يومياً' }, { time: '20:00', name: 'وجهًا لوجه', note: 'حلقة جديدة' }, { time: '21:30', name: 'شو رأيك؟', note: 'إعادة' }]
+    };
+  }
+}
+</script>
+</body>
+</html>

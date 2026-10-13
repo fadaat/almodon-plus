@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#0A2B5C"><svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="400" fill="#0A2B5C"/><circle cx="200" cy="200" r="80" fill="none" stroke="#F7C600" stroke-width="10"/><path d="M180 160v80l65-40z" fill="#fff"/></svg></template>
+<x-dc>
+<helmet>
+<style>body{margin:0;background:#fff}a{color:#0A2B5C;text-decoration:none}a:hover{color:#D92D20}</style>
+</helmet>
+<sc-if value="{{ pHomeA }}" hint-placeholder-val="{{ true }}"><dc-import name="HomeA" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pHomeA2 }}" hint-placeholder-val="{{ false }}"><dc-import name="HomeA v2" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pHomeA3 }}" hint-placeholder-val="{{ false }}"><dc-import name="HomeA v3" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pHomeA4 }}" hint-placeholder-val="{{ false }}"><dc-import name="HomeA v4" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pProgramsA }}" hint-placeholder-val="{{ false }}"><dc-import name="ProgramsA" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pShortsA }}" hint-placeholder-val="{{ false }}"><dc-import name="ShortsA" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pShowPage }}" hint-placeholder-val="{{ false }}"><dc-import name="ShowPage" hint-size="100%,100vh"></dc-import></sc-if>
+<sc-if value="{{ pVideoPage }}" hint-placeholder-val="{{ false }}"><dc-import name="VideoPage" hint-size="100%,100vh"></dc-import></sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  static PAGES = { 'HomeA': 'pHomeA', 'HomeA v2': 'pHomeA2', 'HomeA v3': 'pHomeA3', 'HomeA v4': 'pHomeA4', 'ProgramsA': 'pProgramsA', 'ShortsA': 'pShortsA', 'ShowPage': 'pShowPage', 'VideoPage': 'pVideoPage' };
+  state = { p: 'HomeA' };
+  fromHash() { const k = decodeURIComponent((location.hash || '').slice(1)); return Component.PAGES[k] ? k : null; }
+  componentDidMount() {
+    const h = this.fromHash(); if (h) this.setState({ p: h });
+    this.onClick = e => {
+      const a = e.target && e.target.closest ? e.target.closest('a[href]') : null; if (!a) return;
+      let href = a.getAttribute('href') || ''; try { href = decodeURIComponent(href); } catch (x) {}
+      const m = href.match(/([^\/#?]+)\.dc\.html/); if (!m) return;
+      e.preventDefault(); e.stopPropagation();
+      const k = Component.PAGES[m[1]] ? m[1] : (m[1].startsWith('Home') ? 'HomeA' : m[1].startsWith('Programs') ? 'ProgramsA' : m[1].startsWith('Shorts') ? 'ShortsA' : null);
+      if (!k) return;
+      this.setState({ p: k }); history.pushState(null, '', '#' + encodeURIComponent(k)); window.scrollTo(0, 0);
+    };
+    this.onPop = () => { const k = this.fromHash() || 'HomeA'; this.setState({ p: k }); };
+    document.addEventListener('click', this.onClick, true);
+    window.addEventListener('popstate', this.onPop);
+  }
+  componentWillUnmount() { document.removeEventListener('click', this.onClick, true); window.removeEventListener('popstate', this.onPop); }
+  renderVals() {
+    const out = {}; Object.entries(Component.PAGES).forEach(([k, v]) => { out[v] = this.state.p === k; });
+    return out;
+  }
+}
+</script>
+</body>
+</html>

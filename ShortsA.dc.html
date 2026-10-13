@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="a" screen="S" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<div dir="rtl" style="display:flex;justify-content:center"><div style="display:flex;gap:48px;align-items:flex-start">
+
+    <div id="5a" data-screen-label="Shorts Mobile" style="position:relative;width:390px;height:844px;background:#000;border-radius:36px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.25);flex:none">
+      <img src="{{ cur.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,transparent 18%,transparent 55%,rgba(0,0,0,.85) 100%)"></div>
+      <div style="position:absolute;top:0;inset-inline:0;padding:14px 14px 0;display:flex;flex-direction:column;gap:12px">
+        
+        <div style="display:flex;align-items:center;justify-content:space-between"><a href="Options.dc.html" style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;font:700 18px sans-serif">✕</a><span style="width:22px;height:22px;border-radius:50%;background:#F7C600;display:inline-grid;place-items:center;flex:none"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #0A2B5C;margin-right:1px"></span></span><div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;color:#fff;font-size:14px">🔇</div></div>
+      </div>
+      <div style="position:absolute;left:12px;bottom:200px;display:flex;flex-direction:column;gap:18px;align-items:center;color:#fff;font:600 11px 'IBM Plex Sans Arabic'">
+        <div onClick="{{ like }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:20px;color:{{ likeColor }}">♥</div>{{ likeLabel }}</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:18px">⤴</div>مشاركة</div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.18);display:grid;place-items:center;font-size:18px">🔗</div>نسخ</div>
+        
+        
+      </div>
+      <div style="position:absolute;inset:auto 0 0 0;padding:0 16px 84px;display:flex;flex-direction:column;gap:10px;padding-left:72px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:30px;height:30px;border-radius:50%;background:#0A2B5C;color:#F7C600;display:grid;place-items:center;font:800 15px sans-serif">▶</span><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">من المدن</b><span style="border:1px solid rgba(255,255,255,.6);border-radius:6px;padding:2px 8px;font:700 11px 'Noto Kufi Arabic';color:#fff">تابِع</span></div>
+        <div style="font:700 17px/1.55 'Noto Kufi Arabic';color:#fff">{{ cur.title }}</div>
+        <div style="font-size:12px;color:#D5DCE6">{{ cur.views }} مشاهدة · {{ cur.dur }}</div>
+        <a href="VideoPage.dc.html" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.14);border-radius:8px;padding:10px 12px;color:#fff;font:600 13px 'Noto Kufi Arabic'"><span>▶ شاهد الحلقة الكاملة</span><span>‹</span></a>
+        <div style="height:3px;background:rgba(255,255,255,.3);border-radius:2px"><div style="width:42%;height:100%;background:#fff;border-radius:2px"></div></div>
+      </div>
+      <div onClick="{{ prev }}" style="position:absolute;top:70px;inset-inline:0;height:200px;cursor:pointer"></div>
+      <div style="position:absolute;bottom:-36px;inset-inline:8px;height:64px;border-radius:14px 14px 0 0;overflow:hidden;opacity:.9" onClick="{{ next }}"><img src="{{ nextS.img }}" alt="" style="width:100%;height:280px;object-fit:cover;object-position:top"></div>
+      <div onClick="{{ next }}" style="position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;color:#fff;font:600 11px 'Noto Kufi Arabic';cursor:pointer;text-shadow:0 1px 3px #000"><span style="font-size:14px">⌃</span>اسحب للأعلى</div>
+    </div>
+
+    <div id="5b" data-screen-label="Shorts Desktop" style="position:relative;width:1440px;height:900px;background:#050E1F;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.25);flex:none">
+      <img src="{{ cur.img }}" alt="" style="position:absolute;inset:-40px;width:calc(100% + 80px);height:calc(100% + 80px);object-fit:cover;filter:blur(40px);opacity:.35">
+      <div style="position:relative;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(5,14,31,.7);border-bottom:1px solid rgba(255,255,255,.08)">
+        <div style="display:flex;align-items:center;gap:14px"><img src="https://www.almodon.com/assets/images/logo.svg" alt="المدن" style="height:36px;filter:brightness(0) invert(1)"><span style="width:1px;height:24px;background:rgba(255,255,255,.25)"></span><span style="width:22px;height:22px;border-radius:50%;background:#F7C600;display:inline-grid;place-items:center;flex:none"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #0A2B5C;margin-right:1px"></span></span><span style="font:700 15px 'Noto Kufi Arabic';color:#fff">الشورتس</span></div>
+        <a href="Options.dc.html" style="display:flex;align-items:center;gap:8px;color:#fff;font:600 14px 'Noto Kufi Arabic'">إغلاق <span style="width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.14);display:grid;place-items:center">✕</span></a>
+      </div>
+      <div style="position:relative;height:836px;display:flex;align-items:center;justify-content:center;gap:28px">
+        <div style="width:330px;display:flex;flex-direction:column;gap:14px;align-self:flex-end;margin-bottom:60px">
+          <div style="display:flex;align-items:center;gap:10px"><span style="width:40px;height:40px;border-radius:50%;background:#0A2B5C;color:#F7C600;display:grid;place-items:center;font:800 20px sans-serif;border:2px solid #F7C600">▶</span><div style="display:flex;flex-direction:column"><b style="font:700 16px 'Noto Kufi Arabic';color:#fff">من المدن</b><span style="font-size:12px;color:#9FB2CC">شورتس المدن</span></div></div>
+          <div style="font:700 22px/1.55 'Noto Kufi Arabic';color:#fff">{{ cur.title }}</div>
+          <div style="font-size:13px;color:#9FB2CC">{{ cur.views }} مشاهدة · {{ cur.dur }}</div>
+          <a href="VideoPage.dc.html" style="display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:8px;padding:12px 14px;color:#fff;font:600 14px 'Noto Kufi Arabic'"><span>▶ شاهد الحلقة الكاملة</span><span>‹</span></a>
+          <a href="https://plus.almodon.com" style="display:flex;justify-content:center;align-items:center;height:46px;border-radius:8px;background:#F7C600;color:#071C3D;font:700 14px 'Noto Kufi Arabic'">شاهد المزيد على العربي بلس</a>
+        </div>
+        <div style="position:relative;height:780px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 24px 60px rgba(0,0,0,.6)">
+          <img src="{{ cur.img }}" alt="" style="display:block;width:100%;height:168%;object-fit:cover;object-position:center top">
+          <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.4),transparent 15%)"></div>
+          
+          <div style="position:absolute;top:26px;left:14px;display:flex;gap:8px;color:#fff;font-size:14px"><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.35);display:grid;place-items:center">❚❚</span><span style="width:34px;height:34px;border-radius:50%;background:rgba(0,0,0,.35);display:grid;place-items:center">🔇</span></div>
+          <div style="position:absolute;inset:auto 14px 14px 14px;height:3px;background:rgba(255,255,255,.3);border-radius:2px"><div style="width:42%;height:100%;background:#fff;border-radius:2px"></div></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px;align-items:center;align-self:flex-end;margin-bottom:60px;color:#fff;font:600 12px 'IBM Plex Sans Arabic'">
+          <div onClick="{{ like }}" style="display:flex;flex-direction:column;align-items:center;gap:4px;cursor:pointer"><div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:22px;color:{{ likeColor }}">♥</div>{{ likeLabel }}</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:20px">⤴</div>مشاركة</div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div style="width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.12);display:grid;place-items:center;font-size:18px">&lt;/&gt;</div>تضمين</div>
+        </div>
+        <div style="position:absolute;left:48px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:12px;align-items:center">
+          <div onClick="{{ prev }}" style="width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;display:grid;place-items:center;cursor:pointer;font:700 18px sans-serif">▲</div>
+          <span style="font:600 13px sans-serif;color:#9FB2CC">{{ pos }}</span>
+          <div onClick="{{ next }}" style="width:52px;height:52px;border-radius:50%;background:#F7C600;color:#071C3D;display:grid;place-items:center;cursor:pointer;font:700 18px sans-serif">▼</div>
+          <span style="font-size:11px;color:#6F84A3;text-align:center;line-height:1.6">↑ ↓ للتنقل<br>M كتم الصوت</span>
+        </div>
+        <div style="position:absolute;right:48px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;width:120px">
+          <span style="font:700 12px 'Noto Kufi Arabic';color:#9FB2CC">التالي</span>
+          <sc-for list="{{ upnext }}" as="s" hint-placeholder-count="3"><div onClick="{{ s.go }}" style="display:flex;flex-direction:column;gap:6px;cursor:pointer"><div style="position:relative;aspect-ratio:9/16;border-radius:8px;overflow:hidden;opacity:.8"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover"></div><span style="font:600 12px/1.5 'IBM Plex Sans Arabic';color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ s.title }}</span></div></sc-for>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { i: 0, liked: {} };
+  componentDidMount() {
+    this._k = e => { if (e.key === 'ArrowDown') this.go(this.state.i + 1); if (e.key === 'ArrowUp') this.go(this.state.i - 1); };
+    window.addEventListener('keydown', this._k);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this._k); }
+  go(i) { const n = (window.PLUS_DATA?.shorts || []).length || 1; this.setState({ i: (i + n) % n }); }
+  renderVals() { return Object.assign({ brand: this.props.brand ?? 'برامج المدن' }, this._rv()); }
+  _rv() {
+    const D = window.PLUS_DATA || { shorts: [] };
+    const S = D.shorts, i = this.state.i, n = S.length || 1;
+    const liked = !!this.state.liked[i];
+    return {
+      cur: S[i] || {},
+      segs: S.map((s, k) => ({ bg: k < i ? '#fff' : k === i ? '#F7C600' : 'rgba(255,255,255,.35)', go: () => this.go(k) })),
+      upnext: [1, 2, 3].map(d => { const k = (i + d) % n; return { ...S[k], go: () => this.go(k) }; }),
+      pos: (i + 1) + ' / ' + n, nextS: S[(i + 1) % n] || {},
+      next: () => this.go(i + 1), prev: () => this.go(i - 1),
+      like: () => this.setState(s => ({ liked: { ...s.liked, [i]: !s.liked[i] } })),
+      likeColor: liked ? '#F7C600' : '#fff', likeLabel: liked ? 'أعجبني' : 'إعجاب'
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;background:#E9ECF1;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<section data-options-root="1" dir="rtl" style="padding:48px 64px 96px;display:flex;flex-direction:column;gap:24px;min-width:1960px">
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px">
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <div style="font:700 13px 'Noto Kufi Arabic';color:#3F97CF">برامج المدن داخل almodon.com</div>
+      <h1 style="margin:0;font:800 36px 'Noto Kufi Arabic';color:#0A2B5C">اختر الشاشة</h1>
+    </div>
+    
+  </div>
+  <div style="display:flex;gap:12px">
+    <sc-for list="{{ opts }}" as="o" hint-placeholder-count="3">
+      <div onClick="{{ o.on }}" style="cursor:pointer;width:380px;border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:6px;background:{{ o.bg }};border:2px solid {{ o.bd }}">
+        <div style="display:flex;align-items:center;gap:10px"><span style="font:800 15px 'Noto Kufi Arabic';padding:2px 10px;border-radius:6px;background:{{ o.badgeBg }};color:{{ o.badgeFg }}">{{ o.id }}</span><b style="font:700 18px 'Noto Kufi Arabic';color:{{ o.fg }}">{{ o.name }}</b></div>
+        <span style="font-size:13px;line-height:1.7;color:{{ o.sub }}">{{ o.desc }}</span>
+      </div>
+    </sc-for>
+  </div>
+  <div style="position:sticky;top:0;z-index:40;background:#E9ECF1;display:flex;align-items:center;gap:20px;border-bottom:1px solid #C9D0DA">
+    <sc-for list="{{ screens }}" as="s" hint-placeholder-count="5"><div onClick="{{ s.on }}" style="cursor:pointer;white-space:nowrap;padding:12px 6px;font:700 16px 'Noto Kufi Arabic';color:{{ s.fg }};border-bottom:4px solid {{ s.bd }};margin-bottom:-1px">{{ s.label }}</div></sc-for>
+    <span style="margin-right:auto;font-size:13px;color:#5E6673">{{ note }}</span>
+  </div>
+  <sc-if value="{{ aH }}" hint-placeholder-val="{{ true }}"><dc-import name="HomeA" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2400px"></dc-import></sc-if>
+  <sc-if value="{{ aP }}" hint-placeholder-val="{{ false }}"><dc-import name="ProgramsA" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2800px"></dc-import></sc-if>
+  <sc-if value="{{ aS }}" hint-placeholder-val="{{ false }}"><dc-import name="ShortsA" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,900px"></dc-import></sc-if>
+  <sc-if value="{{ bH }}" hint-placeholder-val="{{ false }}"><dc-import name="HomeB" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,1800px"></dc-import></sc-if>
+  <sc-if value="{{ bP }}" hint-placeholder-val="{{ false }}"><dc-import name="ProgramsB" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2200px"></dc-import></sc-if>
+  <sc-if value="{{ bS }}" hint-placeholder-val="{{ false }}"><dc-import name="ShortsB" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2000px"></dc-import></sc-if>
+  <sc-if value="{{ cH }}" hint-placeholder-val="{{ false }}"><dc-import name="HomeC" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2000px"></dc-import></sc-if>
+  <sc-if value="{{ cP }}" hint-placeholder-val="{{ false }}"><dc-import name="ProgramsC" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2200px"></dc-import></sc-if>
+  <sc-if value="{{ cS }}" hint-placeholder-val="{{ false }}"><dc-import name="ShortsC" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2000px"></dc-import></sc-if>
+  <sc-if value="{{ showX }}" hint-placeholder-val="{{ false }}"><dc-import name="ShowPage" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,5000px"></dc-import></sc-if>
+  <sc-if value="{{ videoX }}" hint-placeholder-val="{{ false }}"><dc-import name="VideoPage" brand="{{ brand }}" embedded="{{ true }}" hint-size="1880px,2600px"></dc-import></sc-if>
+</section>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { o: 'a', s: 'H', b: 'برامج المدن' };
+  componentDidMount() { try { const v = JSON.parse(localStorage.getItem('progOpts') || '{}'); if (v.s && ['H', 'P', 'S', 'X', 'V'].includes(v.s)) this.setState({ s: v.s }); } catch (e) {} }
+  set(p) { this.setState(p, () => localStorage.setItem('progOpts', JSON.stringify({ o: this.state.o, s: this.state.s, b: this.state.b }))); }
+  renderVals() {
+    const { s, b } = this.state; const o = 'a';
+    const meta = [
+      { k: 'a', id: '1', name: 'الشريط الداكن', desc: 'وحدة داكنة على الرئيسية، صفحة القسم ببطل كبير، وعارض شورتس بملء الشاشة.' },
+      { k: 'b', id: '2', name: 'الشورتس أولاً + تابع المشاهدة', desc: 'رفّ شورتس أعلى الرئيسية، صفحة القسم تبدأ بتابع المشاهدة للحلقات، وشبكة شورتس بفلاتر.' },
+      { k: 'c', id: '3', name: 'البرنامج أولاً + الجدول', desc: 'ملصقات البرامج وجدول اليوم، صفحة القسم بجدول أسبوعي، وشورتس مجمّعة حسب البرنامج.' }
+    ];
+    const opts = meta.filter(m => m.k === 'a').map(m => { const a = m.k === o; return { ...m, on: () => this.set({ o: m.k }), bg: a ? '#0A2B5C' : '#fff', bd: a ? '#0A2B5C' : '#D5DAE1', fg: a ? '#fff' : '#0A2B5C', sub: a ? '#C9D5E6' : '#5E6673', badgeBg: a ? '#F7C600' : '#0A2B5C', badgeFg: a ? '#071C3D' : '#fff' }; });
+    const screens = [['H', 'الصفحة الرئيسية'], ['P', 'صفحة البرامج'], ['S', 'شورتس'], ['X', 'صفحة البرنامج'], ['V', 'صفحة الفيديو']].map(([k, l]) => { const a = k === s; return { label: l, on: () => this.set({ s: k }), fg: a ? '#0A2B5C' : '#5E6673', bd: a ? '#F7C600' : 'transparent' }; });
+    const brands = ['برامج المدن', 'برامج المدن'].map(l => { const a = l === b; return { label: l, on: () => this.set({ b: l }), bg: a ? '#0A2B5C' : '#F5F6F8', fg: a ? '#fff' : '#0A2B5C' }; });
+    const v = {}; ['a', 'b', 'c'].forEach(x => ['H', 'P', 'S'].forEach(y => { v[x + y] = o === x && s === y; }));
+    return { opts, screens, brands, brand: b, ...v, showX: s === 'X', videoX: s === 'V', note: s === 'X' || s === 'V' ? 'نفس الصفحة في الخيارات الثلاثة · الهاتف والكمبيوتر' : 'الهاتف (390) · سطح المكتب (1440)' };
+  }
+}
+</script>
+</body>
+</html>

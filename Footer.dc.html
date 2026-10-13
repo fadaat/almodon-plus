@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>a{color:#C9D5E6;text-decoration:none}a:hover{color:#F7C600}</style>
+</helmet>
+<sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+  <footer dir="rtl" style="background:#0A2B5C;color:#C9D5E6;font-family:'IBM Plex Sans Arabic',sans-serif;padding:24px 16px 20px;display:flex;flex-direction:column;gap:18px">
+    <div style="display:flex;align-items:center;justify-content:space-between"><img src="https://www.almodon.com/assets/images/logo.svg" alt="المدن" style="height:34px;filter:brightness(0) invert(1)"><span style="font-size:11px">جريدة إلكترونية مستقلة</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;font:600 13px 'Noto Kufi Arabic'"><a href="#" style="color:#C9D5E6">سياسة</a><a href="#" style="color:#C9D5E6">اقتصاد</a><a href="#" style="color:#C9D5E6">عرب و عالم</a><a href="#" style="color:#C9D5E6">محطات</a><a href="#" style="color:#C9D5E6">رأي</a><a href="#" style="color:#C9D5E6">ثقافة</a><a href="#" style="color:#C9D5E6">ميديا</a><a href="#" style="color:#C9D5E6">فيديو</a><a href="#" style="color:#F7C600">{{ brand }}</a><a href="#" style="color:#C9D5E6">إنفوغراف</a></div>
+    <div style="display:flex;flex-direction:column;gap:8px;padding:14px;background:rgba(255,255,255,.06);border-radius:10px"><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">النشرة الإخبارية</b><div style="display:flex;gap:6px"><div style="flex:1;height:40px;border-radius:6px;background:#fff;color:#8A93A0;font-size:13px;display:flex;align-items:center;padding:0 10px">بريدك الإلكتروني</div><div style="height:40px;padding:0 14px;border-radius:6px;background:#F7C600;color:#071C3D;font:700 13px 'Noto Kufi Arabic';display:flex;align-items:center">اشترك</div></div></div>
+    <div style="display:flex;gap:10px"><sc-for list="{{ social }}" as="s" hint-placeholder-count="5"><span style="width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font:700 11px sans-serif;color:#fff">{{ s }}</span></sc-for></div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;border-top:1px solid rgba(255,255,255,.12);padding-top:14px"><a href="#" style="color:#C9D5E6">من نحن</a><a href="#" style="color:#C9D5E6">اتصل بنا</a><a href="#" style="color:#C9D5E6">سياسة الخصوصية</a><a href="#" style="color:#C9D5E6">شروط الاستخدام</a></div>
+    <span style="font-size:11px;color:#9FB2CC">© 2026 المدن. جميع الحقوق محفوظة</span>
+  </footer>
+</sc-if>
+<sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+  <footer dir="rtl" style="background:#0A2B5C;color:#C9D5E6;font-family:'IBM Plex Sans Arabic',sans-serif;padding:40px 120px 24px;display:flex;flex-direction:column;gap:28px">
+    <div style="display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1.4fr;gap:32px">
+      <div style="display:flex;flex-direction:column;gap:12px"><img src="https://www.almodon.com/assets/images/logo.svg" alt="المدن" style="height:48px;align-self:flex-start;filter:brightness(0) invert(1)"><span style="font-size:13px;line-height:1.8">جريدة إلكترونية مستقلة.. وفي رواية أخرى</span><div style="display:flex;gap:8px"><sc-for list="{{ social }}" as="s" hint-placeholder-count="5"><span style="width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;font:700 11px sans-serif;color:#fff">{{ s }}</span></sc-for></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">الأقسام</b><a href="#" style="color:#C9D5E6">سياسة</a><a href="#" style="color:#C9D5E6">اقتصاد</a><a href="#" style="color:#C9D5E6">عرب و عالم</a><a href="#" style="color:#C9D5E6">محطات</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">&nbsp;</b><a href="#" style="color:#C9D5E6">رأي</a><a href="#" style="color:#C9D5E6">ثقافة</a><a href="#" style="color:#C9D5E6">ميديا</a><a href="#" style="color:#C9D5E6">إنفوغراف</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px;font-size:14px"><b style="font:700 14px 'Noto Kufi Arabic';color:#F7C600">{{ brand }}</b><a href="#" style="color:#C9D5E6">البرامج الحالية</a><a href="#" style="color:#C9D5E6">قريباً</a><a href="#" style="color:#C9D5E6">الحلقات الكاملة</a><a href="#" style="color:#C9D5E6">شورتس</a><a href="#" style="color:#C9D5E6">فيديو</a></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><b style="font:700 14px 'Noto Kufi Arabic';color:#fff">إشترك في النشرة الإخبارية</b><span style="font-size:13px;line-height:1.7">اشترك معنا في نشرة المدن الدورية لتبقى على اتصال دائم بالحدث</span><div style="display:flex;gap:6px"><div style="flex:1;height:42px;border-radius:6px;background:#fff;color:#8A93A0;font-size:13px;display:flex;align-items:center;padding:0 12px">بريدك الإلكتروني</div><div style="height:42px;padding:0 16px;border-radius:6px;background:#F7C600;color:#071C3D;font:700 13px 'Noto Kufi Arabic';display:flex;align-items:center">اشترك الآن</div></div></div>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.12);padding-top:18px;font-size:13px"><span style="color:#9FB2CC">© 2026 المدن. جميع الحقوق محفوظة</span><div style="display:flex;gap:20px"><a href="#" style="color:#C9D5E6">من نحن</a><a href="#" style="color:#C9D5E6">اتصل بنا</a><a href="#" style="color:#C9D5E6">سياسة الخصوصية</a><a href="#" style="color:#C9D5E6">شروط الاستخدام</a></div></div>
+  </footer>
+</sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1440px&quot;,&quot;height&quot;:&quot;320px&quot;},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;brand&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;برامج المدن&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const m = !!this.props.mobile && this.props.mobile !== 'false';
+    return { isMobile: m, isDesktop: !m, brand: this.props.brand ?? 'برامج المدن', social: ['f', 'X', 'IG', 'YT', 'WA'] };
+  }
+}
+</script>
+</body>
+</html>

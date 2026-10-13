@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}</style>
+</helmet>
+<dc-import name="ProtoNav" opt="c" screen="S" hide="{{ embedded }}" hint-size="100%,56px"></dc-import>
+<div dir="rtl" style="display:flex;justify-content:center;gap:48px;align-items:flex-start">
+  <div data-screen-label="Shorts C Mobile" style="width:390px;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none">
+    <dc-import name="NewsBlocks" part="header" mobile="{{ true }}" hint-size="100%,70px"></dc-import>
+    <div style="background:#071C3D;padding:18px 0 20px;display:flex;flex-direction:column;gap:12px">
+      <div style="padding:0 16px;display:flex;flex-direction:column;gap:2px"><h1 style="margin:0;font:800 24px 'Noto Kufi Arabic';color:#fff">شورتس</h1><span style="font-size:12px;color:#9FB2CC">مقاطع عمودية من كل برامجنا</span></div>
+      
+      
+    </div>
+    <div style="padding:18px 0 20px;display:flex;flex-direction:column;gap:22px"><sc-for list="{{ groups }}" as="g" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px;padding:0 16px"><img src="{{ g.img }}" alt="" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #F7C600"><div style="display:flex;flex-direction:column;flex:1"><b style="font:700 15px 'Noto Kufi Arabic';color:#0A2B5C">{{ g.name }}</b><span style="font-size:11px;color:#5E6673">{{ g.count }} شورتس</span></div><span style="border:1.5px solid #0A2B5C;border-radius:6px;padding:3px 10px;font:700 11px 'Noto Kufi Arabic';color:#0A2B5C">تابِع</span></div><div style="display:flex;gap:8px;padding:0 16px;overflow:hidden"><sc-for list="{{ g.items }}" as="s" hint-placeholder-count="3"><div style="position:relative;width:118px;aspect-ratio:9/16;border-radius:10px;overflow:hidden;flex:none"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><div style="position:absolute;inset:auto 0 0 0;padding:26px 8px 8px;background:linear-gradient(0deg,rgba(0,0,0,.85),transparent);font:600 11px/1.5 'IBM Plex Sans Arabic';color:#fff">{{ s.title }}<br><span style="font-size:10px;font-weight:500;opacity:.85">{{ s.meta }}</span></div></div></sc-for></div></div></sc-for></div>
+  <dc-import name="Footer" mobile="{{ true }}" brand="{{ brand }}" hint-size="100%,520px"></dc-import></div>
+
+  <div data-screen-label="Shorts C Desktop" style="width:1440px;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 20px 50px rgba(10,43,92,.15);flex:none">
+    <dc-import name="NewsBlocks" part="header" mobile="{{ false }}" hint-size="100%,170px"></dc-import>
+    <div style="background:#071C3D;padding:32px 120px;display:grid;grid-template-columns:minmax(0,1fr);gap:32px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font:600 14px 'Noto Kufi Arabic';color:#9FB2CC">{{ brand }} ‹</span><h1 style="margin:0;font:800 40px 'Noto Kufi Arabic';color:#fff">شورتس</h1><span style="font-size:15px;color:#C9D5E6;line-height:1.7">مقاطع عمودية من كل برامجنا. تابِع برنامجاً لتظهر شورتسه أولاً.</span></div>
+      
+    </div>
+    <div style="padding:32px 120px 40px;display:flex;flex-direction:column;gap:32px"><sc-for list="{{ groups }}" as="g" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:12px"><img src="{{ g.img }}" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;border:2px solid #F7C600"><div style="display:flex;flex-direction:column;flex:1"><b style="font:700 20px 'Noto Kufi Arabic';color:#0A2B5C">{{ g.name }}</b><span style="font-size:12px;color:#5E6673">{{ g.count }} شورتس · {{ g.schedule }}</span></div><span style="border:1.5px solid #0A2B5C;border-radius:6px;padding:6px 14px;font:700 13px 'Noto Kufi Arabic';color:#0A2B5C">تابِع</span><a href="#" style="font:600 14px 'Noto Kufi Arabic'">الكل ‹</a></div><div style="display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:14px"><sc-for list="{{ g.items7 }}" as="s" hint-placeholder-count="7"><div style="display:flex;flex-direction:column;gap:6px"><div style="position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden"><img src="{{ s.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;top:8px;left:8px;background:rgba(0,0,0,.6);color:#fff;font:500 11px sans-serif;padding:1px 6px;border-radius:3px">{{ s.dur }}</span></div><span style="font:600 13px/1.5 'IBM Plex Sans Arabic'">{{ s.title }}<br><span style="font-size:10px;font-weight:500;opacity:.85">{{ s.meta }}</span></span></div></sc-for></div></div></sc-for></div>
+  <dc-import name="Footer" mobile="{{ false }}" brand="{{ brand }}" hint-size="100%,300px"></dc-import></div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  renderVals() { return Object.assign({ brand: this.props.brand ?? 'برامج المدن' }, this._rv()); }
+  _rv() {
+    const D = window.PLUS_DATA || { shorts: [], shows: [], nav: [] };
+    const S = D.shorts, rot = (k) => S.slice(k).concat(S.slice(0, k));
+    const groups = [D.shows[1], D.shows[0], D.shows[2]].filter(x => x && !x.soon).filter(Boolean).map((sh, i) => { const it = rot(i * 3); return { name: sh.name, img: sh.img, schedule: sh.schedule, count: [24, 61, 18][i], items: it.slice(0, 4), items7: it.slice(0, 7) }; });
+    return { nav: D.nav, navShort: D.nav.slice(0, 5), groups, cw: [5, 2, 7, 1].map((i, k) => ({ ...S[i], pct: [40, 75, 20, 60][k] + '%' })).filter(s => s.img) };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="plus-data.js"></script>
+<style>body{margin:0;font-family:'IBM Plex Sans Arabic',sans-serif;color:#121417}a{color:#0A2B5C;text-decoration:none}a:hover{color:#3F97CF}*{box-sizing:border-box}@keyframes nbpulse{0%{box-shadow:0 0 0 0 rgba(217,45,32,.5)}70%{box-shadow:0 0 0 6px rgba(217,45,32,0)}100%{box-shadow:0 0 0 0 rgba(217,45,32,0)}}@keyframes reelfill{from{width:0}to{width:100%}}</style>
+</helmet>
+<div dir="rtl" style="background:#fff;color:#121417">
+
+<sc-if value="{{ hM }}" hint-placeholder-val="{{ false }}">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #E4E7EC">
+    <div onClick="{{ toggleM }}" style="width:44px;height:44px;display:grid;place-items:center;cursor:pointer;margin-right:-11px;border-radius:8px;background:{{ mBtnBg }}"><div style="display:flex;flex-direction:column;gap:4px;width:22px"><span style="height:2px;background:#0A2B5C"></span><span style="height:2px;background:#0A2B5C"></span><span style="height:2px;background:#0A2B5C"></span></div></div>
+    <img src="https://www.almodon.com/assets/images/logo.svg" alt="المدن" style="height:38px">
+    <div onClick="{{ toggleS }}" style="width:44px;height:44px;display:grid;place-items:center;cursor:pointer;margin-left:-12px;border-radius:8px;background:{{ sBtnBg }}"><span style="position:relative;width:18px;height:18px;display:block"><span style="position:absolute;top:0;right:0;width:13px;height:13px;border:2px solid #0A2B5C;border-radius:50%"></span><span style="position:absolute;bottom:2px;left:0;width:7px;height:2px;background:#0A2B5C;transform:rotate(-45deg)"></span></span></div>
+  </div>
+  <sc-if value="{{ mOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:12px 16px 18px;border-bottom:1px solid #E4E7EC;display:flex;flex-direction:column;gap:6px;background:#fff">
+      <div style="display:flex;align-items:center;gap:10px;height:48px;padding:0 14px;border-radius:8px;background:{{ pmBg }};border:1px solid #0A2B5C"><span style="width:22px;height:22px;border-radius:50%;background:#F7C600;display:grid;place-items:center;flex:none"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #0A2B5C;margin-right:1px"></span></span><span style="font:700 15px 'Noto Kufi Arabic';color:{{ pmFg }};flex:1">البرامج</span><span style="font:600 12px 'Noto Kufi Arabic';color:#F7C600">حلقات · شورتس ‹</span></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;column-gap:12px"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="8"><div style="height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 4px;border-bottom:1px solid #F0F2F5;font:700 14px 'Noto Kufi Arabic';color:{{ n.mc }}">{{ n.label }}<span style="color:{{ n.ac }}">‹</span></div></sc-for></div>
+      <div style="display:flex;gap:14px;padding-top:10px;font-size:12px;color:#5E6673">فيسبوك · إكس · إنستغرام · يوتيوب · واتساب</div>
+    </div>
+  </sc-if>
+  <sc-if value="{{ sOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:12px 16px 18px;border-bottom:1px solid #E4E7EC;display:flex;flex-direction:column;gap:16px;background:#fff">
+      <div style="display:flex;align-items:center;gap:12px"><div style="flex:1;display:flex;align-items:center;gap:8px;height:44px;border:1.5px solid #0A2B5C;border-radius:8px;padding:0 12px"><input value="{{ q }}" onChange="{{ onQ }}" placeholder="ابحث في الأخبار والبرامج" style="flex:1;min-width:0;border:0;outline:0;background:transparent;font:500 14px 'IBM Plex Sans Arabic';color:#121417;direction:rtl"></div><span onClick="{{ toggleS }}" style="font:600 13px 'Noto Kufi Arabic';color:#5E6673;cursor:pointer">إلغاء</span></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font:700 12px 'Noto Kufi Arabic';color:#5E6673">الأكثر بحثاً</span><div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ trending }}" as="t" hint-placeholder-count="4"><span onClick="{{ t.on }}" style="cursor:pointer;padding:6px 12px;border-radius:999px;background:#F5F6F8;font:600 12px 'Noto Kufi Arabic';color:#0A2B5C">{{ t.label }}</span></sc-for></div></div>
+      <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 12px 'Noto Kufi Arabic';color:#5E6673">في برامج المدن</span><sc-for list="{{ sVideos }}" as="v" hint-placeholder-count="2"><div style="display:flex;gap:10px;align-items:center"><div style="position:relative;width:96px;aspect-ratio:16/9;border-radius:6px;overflow:hidden;flex:none"><img src="{{ v.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;bottom:3px;left:3px;background:rgba(0,0,0,.75);color:#fff;font:500 10px sans-serif;padding:1px 4px;border-radius:3px">{{ v.dur }}</span></div><div style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:700 10px 'Noto Kufi Arabic';color:#3F97CF">{{ v.show }}</span><span style="font:600 13px/1.5 'IBM Plex Sans Arabic';color:#121417;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ v.title }}</span></div></div></sc-for></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><span style="font:700 12px 'Noto Kufi Arabic';color:#5E6673">مقالات</span><sc-for list="{{ sArticles }}" as="a" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:2px;padding-bottom:8px;border-bottom:1px solid #F0F2F5"><span style="font:700 10px 'Noto Kufi Arabic';color:#3F97CF">{{ a.cat }}</span><span style="font:600 13px/1.55 'IBM Plex Sans Arabic';color:#121417">{{ a.title }}</span></div></sc-for></div>
+    </div>
+  </sc-if>
+</sc-if>
+
+<sc-if value="{{ hD }}" hint-placeholder-val="{{ false }}">
+  <div style="background:#0A2B5C;color:#fff;font-size:12px;padding:6px 120px;display:flex;justify-content:space-between"><span>آخر تحديث: السبت 3 تشرين الأول 2026 (بيروت)</span><span style="display:flex;gap:14px">فيسبوك · إكس · إنستغرام · يوتيوب · واتساب</span></div>
+  <div style="display:flex;justify-content:center;padding:18px 0"><img src="https://www.almodon.com/assets/images/logo.svg" alt="المدن" style="height:64px"></div>
+  <div style="border-top:1px solid #E4E7EC;border-bottom:3px solid #0A2B5C;display:flex;align-items:center;gap:26px;padding:0 120px;height:52px">
+    <div style="display:flex;gap:24px;font:600 15px 'Noto Kufi Arabic';color:#121417;flex:1"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="9"><span style="white-space:nowrap;padding:14px 0 11px;color:{{ n.c }};border-bottom:3px solid {{ n.bd }}">{{ n.label }}</span></sc-for></div>
+    <div style="display:flex;align-items:center;gap:8px;border-radius:6px 6px 0 0;height:52px;padding:0 16px;margin-bottom:-3px;background:{{ pBg }};border-bottom:3px solid {{ pBd }}"><span style="width:22px;height:22px;border-radius:50%;background:#F7C600;display:inline-grid;place-items:center;flex:none"><span style="width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:7px solid #0A2B5C;margin-right:1px"></span></span><span style="font:700 15px 'Noto Kufi Arabic';color:{{ pFg }}">البرامج</span></div>
+    <div onClick="{{ toggleS }}" style="display:flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid #D5DAE1;border-radius:6px;cursor:pointer;background:{{ sBtnBg }}"><span style="position:relative;width:16px;height:16px;display:block"><span style="position:absolute;top:0;right:0;width:12px;height:12px;border:2px solid #0A2B5C;border-radius:50%"></span><span style="position:absolute;bottom:2px;left:0;width:6px;height:2px;background:#0A2B5C;transform:rotate(-45deg)"></span></span><span style="font:600 13px 'Noto Kufi Arabic';color:#0A2B5C">بحث</span></div>
+  </div>
+  <sc-if value="{{ sOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="padding:24px 120px 28px;border-bottom:1px solid #E4E7EC;background:#fff;display:flex;flex-direction:column;gap:20px;box-shadow:0 12px 24px rgba(10,43,92,.08)">
+      <div style="display:flex;align-items:center;gap:16px"><div style="flex:1;display:flex;align-items:center;gap:10px;height:52px;border:2px solid #0A2B5C;border-radius:8px;padding:0 16px"><input value="{{ q }}" onChange="{{ onQ }}" placeholder="ابحث في الأخبار والمقالات والبرامج" style="flex:1;border:0;outline:0;background:transparent;font:500 16px 'IBM Plex Sans Arabic';color:#121417;direction:rtl"></div><span onClick="{{ toggleS }}" style="font:600 14px 'Noto Kufi Arabic';color:#5E6673;cursor:pointer">إغلاق</span></div>
+      <div style="display:grid;grid-template-columns:240px minmax(0,1.4fr) minmax(0,1fr);gap:40px">
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px 'Noto Kufi Arabic';color:#5E6673">الأكثر بحثاً</span><div style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ trending }}" as="t" hint-placeholder-count="4"><span onClick="{{ t.on }}" style="cursor:pointer;padding:6px 12px;border-radius:999px;background:#F5F6F8;font:600 13px 'Noto Kufi Arabic';color:#0A2B5C">{{ t.label }}</span></sc-for></div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px 'Noto Kufi Arabic';color:#5E6673">في برامج المدن</span><div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px"><sc-for list="{{ sVideos }}" as="v" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:6px"><div style="position:relative;aspect-ratio:16/9;border-radius:6px;overflow:hidden"><img src="{{ v.img }}" alt="" style="width:100%;height:100%;object-fit:cover"><span style="position:absolute;bottom:4px;left:4px;background:rgba(0,0,0,.75);color:#fff;font:500 10px sans-serif;padding:1px 5px;border-radius:3px">{{ v.dur }}</span></div><span style="font:700 10px 'Noto Kufi Arabic';color:#3F97CF">{{ v.show }}</span><span style="font:600 13px/1.5 'IBM Plex Sans Arabic';color:#121417;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ v.title }}</span></div></sc-for></div></div>
+        <div style="display:flex;flex-direction:column;gap:10px"><span style="font:700 13px 'Noto Kufi Arabic';color:#5E6673">مقالات</span><sc-for list="{{ sArticles }}" as="a" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:2px;padding-bottom:10px;border-bottom:1px solid #F0F2F5"><span style="font:700 11px 'Noto Kufi Arabic';color:#3F97CF">{{ a.cat }}</span><span style="font:600 14px/1.55 'IBM Plex Sans Arabic';color:#121417">{{ a.title }}</span></div></sc-for></div>
+      </div>
+    </div>
+  </sc-if>
+</sc-if>
+
+<sc-if value="{{ tMB }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:16px;display:flex;flex-direction:column;gap:18px;border-bottom:8px solid #F5F6F8">
+    <div style="display:flex;flex-direction:column;gap:8px"><img src="{{ bLead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673">{{ bLead.cat }}</span><span style="font:800 20px/1.55 'Noto Kufi Arabic';color:#121417;text-wrap:pretty">{{ bLead.title }}</span><span style="font-size:14px;line-height:1.75;color:#5E6673">{{ bLead.ex }}</span></div>
+    <sc-for list="{{ bCards }}" as="i" hint-placeholder-count="2"><div style="display:flex;gap:12px;padding-top:14px;border-top:1px solid #E4E7EC"><img src="{{ i.img }}" alt="" style="display:block;width:128px;aspect-ratio:16/10;object-fit:cover;border-radius:6px;flex:none"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673">{{ i.cat }}</span><span style="font:700 15px/1.55 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span></div></div></sc-for>
+    <sc-for list="{{ bSmall }}" as="i" hint-placeholder-count="2"><div style="display:flex;gap:12px;padding-top:14px;border-top:1px solid #E4E7EC"><img src="{{ i.img }}" alt="" style="display:block;width:128px;aspect-ratio:16/10;object-fit:cover;border-radius:6px;flex:none"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673">{{ i.cat }}</span><span style="font:700 15px/1.55 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span></div></div></sc-for>
+  </div>
+</sc-if>
+
+<sc-if value="{{ tDB }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:28px 120px 36px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:10px"><img src="{{ bLead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px"><span style="font:600 13px 'Noto Kufi Arabic';color:#5E6673">{{ bLead.cat }}</span><span style="font:800 26px/1.5 'Noto Kufi Arabic';color:#121417;text-wrap:balance">{{ bLead.title }}</span><span style="font-size:15px;line-height:1.8;color:#5E6673">{{ bLead.ex }}</span></div>
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px"><sc-for list="{{ bCards }}" as="i" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:8px"><img src="{{ i.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673">{{ i.cat }}</span><span style="font:700 17px/1.55 'Noto Kufi Arabic';color:#121417;text-wrap:pretty">{{ i.title }}</span><span style="font-size:14px;line-height:1.7;color:#5E6673;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ i.ex }}</span></div></sc-for></div>
+      <div style="height:1px;background:#E4E7EC"></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px"><sc-for list="{{ bSmall }}" as="i" hint-placeholder-count="2"><div style="display:flex;gap:12px;align-items:flex-start"><img src="{{ i.img }}" alt="" style="display:block;width:44%;aspect-ratio:16/9;object-fit:cover;border-radius:6px;flex:none"><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673">{{ i.cat }}</span><span style="font:700 15px/1.6 'Noto Kufi Arabic';color:#121417;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ i.title }}</span></div></div></sc-for></div>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ tM }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:16px;display:flex;flex-direction:column;gap:12px">
+    <sc-if value="{{ tlAny }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5484D;animation:nbpulse 1.6s infinite"></span><span style="font:700 14px 'Noto Kufi Arabic';color:#E5484D">تحديثات مباشرة</span></div></sc-if><sc-if value="{{ tlNone }}" hint-placeholder-val="{{ false }}"><span style="font:700 12px 'Noto Kufi Arabic';color:#3F97CF">{{ lead.cat }}</span></sc-if>
+    <span style="font:800 21px/1.55 'Noto Kufi Arabic';color:#121417;text-wrap:pretty">{{ lead.title }}</span>
+    <img src="{{ lead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#F1F2F5">
+    <sc-if value="{{ tlAny }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;padding-top:4px"><sc-for list="{{ ups }}" as="u" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:10px minmax(0,1fr);gap:0 14px">
+          <div style="display:flex;flex-direction:column;align-items:center"><span style="width:1px;height:6px;flex:none;background:{{ u.upC }}"></span><span style="width:10px;height:10px;border-radius:50%;flex:none;background:#E5484D"></span><span style="flex:1;width:1px;background:{{ u.dnC }}"></span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding-bottom:16px"><span style="font:500 12px sans-serif;color:#5E6673">{{ u.time }}</span><span style="font:600 14px/1.6 'IBM Plex Sans Arabic';color:#121417;text-wrap:pretty">{{ u.text }}</span></div>
+        </div></sc-for></div>
+      <sc-if value="{{ upMore }}" hint-placeholder-val="{{ true }}"><a href="#" style="font:700 13px 'Noto Kufi Arabic';color:#0A2B5C">كل التحديثات ({{ upTotal }}) ‹</a></sc-if></sc-if>
+  </div>
+  <div style="padding:0 16px 16px;display:flex;flex-direction:column;gap:12px;border-bottom:8px solid #F5F6F8"><sc-for list="{{ top4 }}" as="i" hint-placeholder-count="4"><div style="display:flex;gap:10px;padding-top:12px;border-top:1px solid #F0F2F5"><img src="{{ i.img }}" alt="" style="display:block;width:116px;aspect-ratio:16/10;object-fit:cover;border-radius:6px;flex:none"><div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font:700 11px 'Noto Kufi Arabic';color:#3F97CF">{{ i.cat }}</span><span style="font:700 14px/1.55 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span><span style="font-size:11px;color:#5E6673">{{ i.by }}</span></div></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ tD }}" hint-placeholder-val="{{ false }}">
+  <div style="padding:28px 120px 0;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1.7fr) minmax(0,1fr);gap:24px;align-items:start">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ tlAny }}" hint-placeholder-val="{{ true }}"><div style="display:flex;align-items:center;justify-content:space-between;gap:12px"><div style="display:flex;align-items:center;gap:8px"><span style="width:10px;height:10px;border-radius:50%;background:#E5484D;animation:nbpulse 1.6s infinite"></span><span style="font:700 14px 'Noto Kufi Arabic';color:#E5484D">تحديثات مباشرة</span></div><sc-if value="{{ upMore }}" hint-placeholder-val="{{ true }}"><a href="#" style="font:700 12px 'Noto Kufi Arabic';color:#0A2B5C;white-space:nowrap;flex:none">كل التحديثات ({{ upTotal }}) ‹</a></sc-if></div></sc-if><sc-if value="{{ tlNone }}" hint-placeholder-val="{{ false }}"><span style="font:700 12px 'Noto Kufi Arabic';color:#3F97CF">{{ lead.cat }}</span></sc-if>
+      <span style="font:800 22px/1.55 'Noto Kufi Arabic';color:#121417;text-wrap:balance">{{ lead.title }}</span>
+      <sc-if value="{{ tlAny }}" hint-placeholder-val="{{ true }}"><div style="display:flex;flex-direction:column;padding-top:4px"><sc-for list="{{ ups }}" as="u" hint-placeholder-count="4"><div style="display:grid;grid-template-columns:10px minmax(0,1fr);gap:0 14px">
+          <div style="display:flex;flex-direction:column;align-items:center"><span style="width:1px;height:6px;flex:none;background:{{ u.upC }}"></span><span style="width:10px;height:10px;border-radius:50%;flex:none;background:#E5484D"></span><span style="flex:1;width:1px;background:{{ u.dnC }}"></span></div>
+          <div style="display:flex;flex-direction:column;gap:4px;padding-bottom:14px"><span style="font:500 12px sans-serif;color:#5E6673">{{ u.time }}</span><span style="font:600 15px/1.6 'IBM Plex Sans Arabic';color:#121417;text-wrap:pretty">{{ u.text }}</span></div>
+        </div></sc-for></div></sc-if>
+      <sc-if value="{{ tlNone }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px;line-height:1.8;color:#3D4450">{{ lead.ex }}</span><span style="font-size:12px;color:#5E6673">{{ lead.by }}</span></sc-if>
+    </div>
+    <img src="{{ lead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#F1F2F5">
+    <div style="display:flex;flex-direction:column;gap:8px"><img src="{{ side1.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#F1F2F5"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673;margin-top:4px">{{ side1.cat }}</span><span style="font:700 17px/1.6 'Noto Kufi Arabic';color:#121417;text-wrap:pretty">{{ side1.title }}</span><span style="font-size:14px;line-height:1.75;color:#5E6673">{{ side1.ex }}</span></div>
+  </div>
+  <div style="padding:36px 120px 36px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px"><sc-for list="{{ top4 }}" as="i" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:8px"><img src="{{ i.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;background:#F1F2F5"><span style="font:600 12px 'Noto Kufi Arabic';color:#5E6673;margin-top:4px">{{ i.cat }}</span><span style="font:700 17px/1.6 'Noto Kufi Arabic';color:#121417;text-wrap:pretty">{{ i.title }}</span></div></sc-for></div>
+</sc-if>
+
+<sc-if value="{{ isM }}" hint-placeholder-val="{{ false }}">
+  <sc-for list="{{ secsM }}" as="s" hint-placeholder-count="1"><div style="display:flex;flex-direction:column">
+    <sc-if value="{{ s.isStd }}" hint-placeholder-val="{{ true }}"><div style="padding:20px 16px;display:flex;flex-direction:column;gap:12px;border-top:8px solid #F5F6F8">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E7EC"><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:6px;margin-bottom:-1px">{{ s.title }}</span><a href="#" style="font:600 12px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div>
+      <div style="display:flex;flex-direction:column;gap:8px"><img src="{{ s.lead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px"><span style="font:700 17px/1.55 'Noto Kufi Arabic';color:#121417">{{ s.lead.title }}</span><span style="font-size:11px;color:#5E6673">{{ s.lead.by }}</span></div>
+      <sc-for list="{{ s.items3 }}" as="i" hint-placeholder-count="3"><div style="display:flex;gap:10px;padding-top:12px;border-top:1px solid #F0F2F5"><img src="{{ i.img }}" alt="" style="display:block;width:104px;aspect-ratio:16/10;object-fit:cover;border-radius:6px;flex:none"><span style="font:700 13px/1.6 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span></div></sc-for>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Politics reels" style="background:#071C3D;padding:22px 0 24px;display:flex;flex-direction:column;gap:16px">
+      <div style="padding:0 16px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#D92D20"></span><span style="font:600 12px 'Noto Kufi Arabic';color:#C9D5E6">سياسة في دقيقة</span></div>
+        <span style="font:800 22px/1.4 'Noto Kufi Arabic';color:#fff">ريلز سياسة</span>
+        <span style="font-size:13px;line-height:1.8;color:#C9D5E6;text-wrap:pretty">أبرز الملفات السياسية في مقاطع قصيرة من برامج المدن.</span>
+      </div></div>
+      <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px;scroll-snap-type:x mandatory;scroll-padding:0 16px"><sc-for list="{{ reels }}" as="r" hint-placeholder-count="4"><a href="ShortsA.dc.html" style="flex:0 0 160px;aspect-ratio:9/16;position:relative;border-radius:10px;overflow:hidden;background:#0B1F42;display:block;color:#fff;scroll-snap-align:start">
+          <img src="{{ r.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,23,53,.95) 8%,rgba(7,23,53,.3) 45%,rgba(7,23,53,0) 65%)"></div>
+          <span style="position:absolute;top:10px;right:10px;background:rgba(0,0,0,.55);color:#fff;font:600 11px sans-serif;padding:3px 8px;border-radius:999px">{{ r.dur }}</span>
+          <div style="position:absolute;inset:auto 0 0 0;padding:0 12px 14px;display:flex;flex-direction:column;gap:5px"><span style="font:700 11px 'Noto Kufi Arabic';color:#F7C600">{{ r.show }}</span><span style="font:700 13px/1.6 'Noto Kufi Arabic';color:#fff;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ r.title }}</span><span style="font-size:11px;color:#C9D5E6">{{ r.views }} مشاهدة</span></div>
+        </a></sc-for><div style="flex:0 0 8px"></div></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels5 }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Shorts carousel" style="padding:24px 0 26px;background:#F5F6F8;display:flex;flex-direction:column;gap:14px">
+      <div style="padding:0 16px;display:flex;align-items:center;gap:10px"><span style="width:3px;height:20px;background:#D92D20;border-radius:2px"></span><span style="font:800 19px 'Noto Kufi Arabic';color:#121417">مقاطع قصيرة</span></div>
+      <div style="display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding:0 16px;scroll-snap-type:x mandatory;scroll-padding:0 16px"><sc-for list="{{ carItems }}" as="c" hint-placeholder-count="3"><a href="ShortsA.dc.html" style="flex:0 0 150px;aspect-ratio:9/16;position:relative;border-radius:14px;overflow:hidden;background:#0B1F42;display:block;color:#fff;scroll-snap-align:start">
+          <img src="{{ c.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,23,53,.95) 6%,rgba(7,23,53,.3) 42%,rgba(7,23,53,0) 62%)"></div>
+          <span style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.5);border-radius:999px;padding:3px 9px;font:600 11px sans-serif;color:#fff"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid #fff"></span>{{ c.dur }}</span>
+          <div style="position:absolute;inset:auto 0 0 0;padding:0 12px 14px;display:flex;flex-direction:column;gap:6px"><span style="font:700 11px 'Noto Kufi Arabic';color:#F7C600">{{ c.show }}</span><span style="font:700 13px/1.6 'Noto Kufi Arabic';color:#fff;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty">{{ c.title }}</span><span style="font:500 11px 'IBM Plex Sans Arabic';color:#C9D5E6">{{ c.views }} مشاهدة</span></div>
+        </a></sc-for><div style="flex:0 0 6px"></div></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isOp }}" hint-placeholder-val="{{ false }}"><div style="padding:20px 0;display:flex;flex-direction:column;gap:14px;background:#F5F6F8">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:0 16px;border-bottom:1px solid #D5DAE1"><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:6px;margin-bottom:-1px">رأي</span><a href="#" style="font:600 12px 'Noto Kufi Arabic'">كل الكتّاب ‹</a></div>
+      <div style="display:flex;gap:10px;padding:0 16px;overflow-x:auto"><sc-for list="{{ opinion }}" as="o" hint-placeholder-count="3"><div style="flex:none;width:250px;background:#fff;border-radius:8px;padding:16px;display:flex;flex-direction:column;gap:12px"><div style="display:flex;align-items:center;gap:10px"><sc-if value="{{ o.img }}" hint-placeholder-val="{{ true }}"><img src="{{ o.img }}" alt="" style="width:48px;height:48px;border-radius:50%;object-fit:cover"></sc-if><sc-if value="{{ o.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:48px;height:48px;border-radius:50%;background:#0A2B5C;color:#F7C600;display:grid;place-items:center;font:800 18px 'Noto Kufi Arabic'">{{ o.ini }}</span></sc-if><span style="font:700 13px 'Noto Kufi Arabic';color:#3F97CF">{{ o.name }}</span></div><span style="font:700 15px/1.6 'Noto Kufi Arabic';color:#121417">{{ o.title }}</span></div></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isSec }}" hint-placeholder-val="{{ false }}"><div style="padding:20px 0;display:flex;flex-direction:column;gap:14px;border-top:8px solid #F5F6F8">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:0 16px;border-bottom:1px solid #E4E7EC"><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:6px;margin-bottom:-1px">أسرار المدن</span><a href="#" style="font:600 12px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div>
+      <div style="display:flex;gap:10px;padding:0 16px;overflow-x:auto"><sc-for list="{{ secrets }}" as="x" hint-placeholder-count="3"><div style="flex:none;width:270px;border:1px solid #E4E7EC;border-top:3px solid #F7C600;border-radius:6px;padding:14px;display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;color:#5E6673">{{ x.date }}</span><span style="font:700 15px 'Noto Kufi Arabic';color:#0A2B5C">{{ x.title }}</span><span style="font-size:13px;line-height:1.7;color:#3D4450;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ x.text }}</span></div></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isNews }}" hint-placeholder-val="{{ false }}"><div style="margin:20px 16px;background:#0A2B5C;border-radius:10px;padding:20px;display:flex;flex-direction:column;gap:12px"><span style="font:700 17px/1.5 'Noto Kufi Arabic';color:#fff">إشترك في النشرة الإخبارية ليصلك كل جديد</span><span style="font-size:13px;line-height:1.7;color:#C9D5E6">اشترك معنا في نشرة المدن الدورية لتبقى على اتصال دائم بالحدث</span><div style="display:flex;flex-direction:column;gap:8px"><div style="height:44px;border-radius:6px;background:#fff;padding:0 12px;display:flex;align-items:center;font-size:13px;color:#8A93A3">بريدك الإلكتروني</div><div style="height:44px;border-radius:6px;background:#F7C600;display:grid;place-items:center;font:700 14px 'Noto Kufi Arabic';color:#071C3D">اشترك الآن</div></div></div></sc-if>
+    <sc-if value="{{ s.isMost }}" hint-placeholder-val="{{ false }}"><div style="padding:20px 16px;display:flex;flex-direction:column;gap:4px;border-top:8px solid #F5F6F8">
+      <div style="display:flex;border-bottom:1px solid #E4E7EC;margin-bottom:8px"><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:6px;margin-bottom:-1px">الأكثر قراءة</span></div>
+      <sc-for list="{{ most }}" as="m" hint-placeholder-count="5"><div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F0F2F5"><span style="font:800 26px/1 'Noto Kufi Arabic';color:#3F97CF;width:22px;flex:none">{{ m.n }}</span><span style="font:700 14px/1.6 'Noto Kufi Arabic';color:#121417">{{ m.title }}</span></div></sc-for>
+    </div></sc-if>
+    <sc-if value="{{ s.isInfo }}" hint-placeholder-val="{{ false }}"><div style="padding:20px 0 24px;display:flex;flex-direction:column;gap:12px;border-top:8px solid #F5F6F8">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin:0 16px;border-bottom:1px solid #E4E7EC"><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:6px;margin-bottom:-1px">إنفوغراف</span><a href="#" style="font:600 12px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div>
+      <div style="display:flex;gap:10px;padding:0 16px;overflow-x:auto"><sc-for list="{{ info }}" as="g" hint-placeholder-count="2"><div style="flex:none;width:240px;display:flex;flex-direction:column;gap:6px"><img src="{{ g.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px"><span style="font:700 14px/1.55 'Noto Kufi Arabic';color:#121417">{{ g.title }}</span></div></sc-for></div>
+    </div></sc-if>
+  </div></sc-for>
+</sc-if>
+
+<sc-if value="{{ isD }}" hint-placeholder-val="{{ false }}">
+  <sc-for list="{{ secsD }}" as="s" hint-placeholder-count="1"><div style="display:flex;flex-direction:column">
+    <sc-if value="{{ s.isStd }}" hint-placeholder-val="{{ true }}"><div style="padding:32px 120px 8px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E7EC"><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:8px;margin-bottom:-1px">{{ s.title }}</span><a href="#" style="font:600 14px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div>
+      <sc-if value="{{ s.cards }}" hint-placeholder-val="{{ true }}"><div style="display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr);gap:24px">
+        <div style="display:flex;flex-direction:column;gap:10px"><img src="{{ s.lead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px"><span style="font:700 22px/1.5 'Noto Kufi Arabic';color:#121417">{{ s.lead.title }}</span><span style="font-size:14px;line-height:1.8;color:#3D4450">{{ s.lead.ex }}</span><span style="font-size:12px;color:#5E6673">{{ s.lead.by }}</span></div>
+        <div style="grid-column:span 2;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px 24px;align-content:start"><sc-for list="{{ s.items }}" as="i" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:8px"><img src="{{ i.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px"><span style="font:700 15px/1.55 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span></div></sc-for></div>
+      </div></sc-if>
+      <sc-if value="{{ s.list }}" hint-placeholder-val="{{ false }}"><div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:36px">
+        <div style="display:flex;flex-direction:column;gap:10px"><img src="{{ s.lead.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:6px"><span style="font:700 24px/1.5 'Noto Kufi Arabic';color:#121417">{{ s.lead.title }}</span><span style="font-size:14px;line-height:1.8;color:#3D4450">{{ s.lead.ex }}</span><span style="font-size:12px;color:#5E6673">{{ s.lead.by }}</span></div>
+        <div style="display:flex;flex-direction:column"><sc-for list="{{ s.items }}" as="i" hint-placeholder-count="4"><div style="display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #F0F2F5"><img src="{{ i.img }}" alt="" style="display:block;width:150px;aspect-ratio:16/10;object-fit:cover;border-radius:6px;flex:none"><span style="font:700 16px/1.6 'Noto Kufi Arabic';color:#121417">{{ i.title }}</span></div></sc-for></div>
+      </div></sc-if>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Politics reels" style="margin-top:32px;background:#071C3D;padding:40px 120px;display:grid;grid-template-columns:300px minmax(0,1fr);gap:48px;align-items:stretch">
+      <div style="display:flex;flex-direction:column;justify-content:space-between;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:50%;background:#D92D20"></span><span style="font:600 14px 'Noto Kufi Arabic';color:#C9D5E6">سياسة في دقيقة</span></div>
+        <span style="font:800 34px/1.4 'Noto Kufi Arabic';color:#fff">ريلز سياسة</span>
+        <span style="font-size:16px;line-height:1.8;color:#C9D5E6;text-wrap:pretty">أبرز الملفات السياسية في مقاطع قصيرة من برامج المدن.</span>
+      </div>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;align-items:baseline;gap:6px;font:800 30px 'Noto Kufi Arabic';color:#fff">{{ reelCur }}<span style="font:600 15px 'Noto Kufi Arabic';color:#8A9BB5">/ {{ reelTot }}</span></div>
+          <div style="display:flex;gap:4px"><sc-for list="{{ reels }}" as="g" hint-placeholder-count="8"><span style="flex:1;height:3px;border-radius:2px;background:{{ g.seg }}"></span></sc-for></div>
+          <div style="display:flex;align-items:center;gap:10px;margin-top:6px"><div onClick="{{ reelPrev }}" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;color:#fff;font:700 20px sans-serif">›</div><div onClick="{{ reelNext }}" style="width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;color:#fff;font:700 20px sans-serif">‹</div><a href="ShortsA.dc.html" style="margin-inline-start:8px;display:flex;align-items:center;gap:12px;background:#fff;color:#071C3D;border-radius:999px;height:44px;padding:0 22px;font:700 14px 'Noto Kufi Arabic'">شاهد الكل<span style="font:700 18px sans-serif">←</span></a></div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px"><sc-for list="{{ reels }}" as="r" hint-placeholder-count="8"><div onMouseEnter="{{ r.go }}" onClick="{{ r.go }}" style="flex:{{ r.flex }};min-width:64px;height:480px;position:relative;border-radius:10px;overflow:hidden;background:#0B1F42;cursor:pointer;transition:flex .45s ease">
+          <img src="{{ r.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:{{ r.op }};transition:opacity .45s">
+          <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,23,53,.95) 8%,rgba(7,23,53,.25) 50%,rgba(7,23,53,.1))"></div>
+          <sc-if value="{{ r.off }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;padding:14px 0;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
+            <span style="font:700 13px 'Noto Kufi Arabic';color:#F7C600">{{ r.n }}</span>
+            <span style="writing-mode:vertical-rl;font:700 13px 'Noto Kufi Arabic';color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-height:70%">{{ r.show }}</span>
+          </div></sc-if>
+          <sc-if value="{{ r.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;padding:14px;display:flex;flex-direction:column;justify-content:space-between">
+            <div style="display:flex;align-items:center;justify-content:space-between"><span style="background:#D92D20;color:#fff;font:700 11px 'Noto Kufi Arabic';padding:3px 10px;border-radius:3px">سياسة</span><span style="background:rgba(0,0,0,.55);color:#fff;font:600 11px sans-serif;padding:3px 8px;border-radius:999px">{{ r.dur }}</span></div>
+            <div style="position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;border-radius:50%;border:2px solid #fff;background:rgba(0,0,0,.4);display:grid;place-items:center"><span style="width:0;height:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-left:15px solid #fff;margin-left:4px"></span></div>
+            <div style="display:flex;flex-direction:column;gap:6px"><span style="font:700 12px 'Noto Kufi Arabic';color:#F7C600">{{ r.show }}</span><span style="font:700 19px/1.6 'Noto Kufi Arabic';color:#fff;text-wrap:pretty">{{ r.title }}</span><span style="font-size:12px;color:#C9D5E6">{{ r.views }} مشاهدة</span></div>
+          </div></sc-if>
+        </div></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels5 }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Shorts carousel" style="margin-top:32px;padding:40px 0 36px;background:#F5F6F8;display:flex;flex-direction:column;gap:20px">
+      <div style="padding:0 120px;display:flex;align-items:center;gap:10px"><span style="width:3px;height:24px;background:#D92D20;border-radius:2px"></span><span style="font:800 26px 'Noto Kufi Arabic';color:#121417">مقاطع قصيرة</span></div>
+      <div style="display:flex;align-items:center;gap:16px;overflow-x:auto;scrollbar-width:thin;padding:4px 120px 14px;height:460px"><sc-for list="{{ carItems }}" as="c" hint-placeholder-count="6"><a href="ShortsA.dc.html" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="flex:0 0 {{ c.w }};aspect-ratio:9/16;position:relative;border-radius:14px;overflow:hidden;background:#0B1F42;display:block;color:#fff;transition:flex-basis .45s cubic-bezier(.3,.7,.2,1),box-shadow .3s;box-shadow:{{ c.sh }};scroll-snap-align:start">
+          <img src="{{ c.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <sc-if value="{{ c.hov }}" hint-placeholder-val="{{ false }}"><video ref="{{ carVid }}" src="{{ c.video }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video></sc-if>
+          <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(7,23,53,.95) 6%,rgba(7,23,53,.3) 42%,rgba(7,23,53,0) 62%)"></div>
+          <span style="position:absolute;top:10px;right:10px;display:flex;align-items:center;gap:5px;background:rgba(0,0,0,.5);border-radius:999px;padding:3px 9px;font:600 11px sans-serif;color:#fff"><span style="width:0;height:0;border-top:4px solid transparent;border-bottom:4px solid transparent;border-left:6px solid #fff"></span>{{ c.dur }}</span>
+          <div style="position:absolute;inset:auto 0 0 0;padding:0 12px 14px;display:flex;flex-direction:column;gap:6px"><span style="font:700 11px 'Noto Kufi Arabic';color:#F7C600">{{ c.show }}</span><span style="font:700 14px/1.6 'Noto Kufi Arabic';color:#fff;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;text-wrap:pretty">{{ c.title }}</span><span style="font:500 11px 'IBM Plex Sans Arabic';color:#C9D5E6">{{ c.views }} مشاهدة</span></div>
+        </a></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels4 }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Shorts feed" style="margin-top:32px;padding:44px 120px;background:#fff;border-top:1px solid #E6E9EE;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:40px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:16px;align-self:start;padding-top:20px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:3px;height:24px;background:#D92D20;border-radius:2px"></span><span style="font:800 26px 'Noto Kufi Arabic';color:#121417">مقاطع قصيرة</span></div>
+        <span style="font-size:16px;line-height:1.8;color:#3D4450;text-wrap:pretty">مرّر للأعلى والأسفل لمشاهدة المزيد.</span>
+        <a href="ShortsA.dc.html" style="align-self:flex-start;margin-top:6px;display:flex;align-items:center;gap:12px;border:1.5px solid #121417;color:#121417;border-radius:999px;height:46px;padding:0 22px;font:700 14px 'Noto Kufi Arabic'">كل المقاطع<span style="font:700 18px sans-serif">←</span></a>
+      </div>
+      <div style="display:flex;align-items:flex-end;gap:18px">
+        <div ref="{{ feedRef }}" onScroll="{{ feedScroll }}" style="width:340px;height:604px;border-radius:16px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;background:#0B1F42"><sc-for list="{{ reels }}" as="r" hint-placeholder-count="2"><a href="ShortsA.dc.html" style="position:relative;display:block;height:604px;scroll-snap-align:start;scroll-snap-stop:always;color:#fff">
+          <img src="{{ r.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(0,0,0,.85) 4%,rgba(0,0,0,.2) 38%,rgba(0,0,0,0) 60%)"></div>
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center"><span style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:18px solid #fff;margin-left:5px"></span></div>
+          <div style="position:absolute;inset:auto 0 0 0;padding:0 16px 18px;display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;align-items:center;gap:8px"><span style="width:30px;height:30px;border-radius:50%;background:#D92D20;display:grid;place-items:center;font:800 12px 'Noto Kufi Arabic';color:#fff">م</span><span style="font:700 13px 'Noto Kufi Arabic';color:#fff">{{ r.show }}</span><span style="border:1px solid rgba(255,255,255,.7);border-radius:999px;padding:1px 10px;font:700 11px 'Noto Kufi Arabic';color:#fff">متابعة</span></div>
+            <span style="font:700 16px/1.6 'Noto Kufi Arabic';color:#fff;text-wrap:pretty">{{ r.title }}</span>
+            <span style="font:500 12px 'IBM Plex Sans Arabic';color:#D6DCE5">{{ r.views }} مشاهدة · {{ r.dur }}</span>
+          </div>
+        </a></sc-for></div>
+        <div style="display:flex;flex-direction:column;gap:18px;padding-bottom:8px">
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:52px;height:52px;border-radius:50%;background:#EEF0F3;display:grid;place-items:center;color:#121417" style-hover="background:#E1E5EB"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-9.2-9C1.4 8 3.3 4.5 6.8 4.5c2 0 3.4 1.1 5.2 3 1.8-1.9 3.2-3 5.2-3 3.5 0 5.4 3.5 4 6.5C19 15.5 12 20 12 20z"></path></svg></div><span style="font:600 12px 'Noto Kufi Arabic';color:#3D4450">إعجاب</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:52px;height:52px;border-radius:50%;background:#EEF0F3;display:grid;place-items:center;color:#121417" style-hover="background:#E1E5EB"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"></path></svg></div><span style="font:600 12px 'Noto Kufi Arabic';color:#3D4450">تعليق</span></div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:6px;cursor:pointer"><div style="width:52px;height:52px;border-radius:50%;background:#EEF0F3;display:grid;place-items:center;color:#121417" style-hover="background:#E1E5EB"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-7M16 6l-4-4-4 4M12 2v13"></path></svg></div><span style="font:600 12px 'Noto Kufi Arabic';color:#3D4450">مشاركة</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-start;gap:12px">
+        <div onClick="{{ feedUp }}" style="width:52px;height:52px;border-radius:50%;background:#EEF0F3;display:grid;place-items:center;cursor:pointer;color:#121417" style-hover="background:#E1E5EB"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"></path></svg></div>
+        <span style="font:700 14px 'Noto Kufi Arabic';color:#3D4450;padding-inline-start:10px">{{ feedCur }} / {{ reelTot }}</span>
+        <div onClick="{{ feedDown }}" style="width:52px;height:52px;border-radius:50%;background:#EEF0F3;display:grid;place-items:center;cursor:pointer;color:#121417" style-hover="background:#E1E5EB"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"></path></svg></div>
+      </div>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels3 }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Shorts story" style="margin-top:32px;background:#071C3D;padding:48px 120px;display:grid;grid-template-columns:minmax(0,1fr) 340px minmax(0,1fr);gap:56px;align-items:center">
+      <div style="display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:8px;height:8px;border-radius:50%;background:#D92D20"></span><span style="font:600 15px 'Noto Kufi Arabic';color:#C9D5E6">مقاطع قصيرة</span></div>
+        <span style="font:800 36px/1.4 'Noto Kufi Arabic';color:#fff;text-wrap:balance">الخبر في أقل من دقيقة</span>
+        <span style="font-size:16px;line-height:1.8;color:#C9D5E6;text-wrap:pretty">مقاطع سريعة من برامج المدن تتابع تلقائياً.</span>
+        <a href="ShortsA.dc.html" style="align-self:flex-start;margin-top:8px;display:flex;align-items:center;gap:12px;background:#fff;color:#071C3D;border-radius:999px;height:48px;padding:0 24px;font:700 15px 'Noto Kufi Arabic'">كل المقاطع<span style="font:700 18px sans-serif">←</span></a>
+      </div>
+      <div onMouseEnter="{{ storyPause }}" onMouseLeave="{{ storyPlay }}" style="position:relative;width:340px;aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:#0B1F42;box-shadow:0 30px 60px rgba(0,0,0,.45);outline:1px solid rgba(255,255,255,.12)">
+        <img src="{{ reelA.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,23,53,.7),rgba(7,23,53,0) 22%,rgba(7,23,53,0) 50%,rgba(7,23,53,.95))"></div>
+        <div style="position:absolute;top:14px;left:14px;right:14px;display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;gap:4px;direction:rtl"><sc-for list="{{ reels }}" as="g" hint-placeholder-count="8"><span style="flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden;display:flex"><sc-if value="{{ g.done }}" hint-placeholder-val="{{ false }}"><span style="flex:1;background:#fff"></span></sc-if><sc-if value="{{ g.on }}" hint-placeholder-val="{{ false }}"><span style="background:#fff;animation:reelfill 6s linear forwards;animation-play-state:{{ storyState }}"></span></sc-if></span></sc-for></div>
+          <div style="display:flex;align-items:center;gap:8px"><span style="width:30px;height:30px;border-radius:50%;background:#D92D20;display:grid;place-items:center;font:800 12px 'Noto Kufi Arabic';color:#fff">م</span><span style="font:700 13px 'Noto Kufi Arabic';color:#fff">{{ reelA.show }}</span><span style="font:500 12px 'IBM Plex Sans Arabic';color:#C9D5E6">{{ reelA.dur }}</span></div>
+        </div>
+        <div onClick="{{ reelPrev }}" style="position:absolute;top:20%;bottom:30%;right:0;width:35%;cursor:pointer"></div>
+        <div onClick="{{ reelNext }}" style="position:absolute;top:20%;bottom:30%;left:0;width:35%;cursor:pointer"></div>
+        <a href="ShortsA.dc.html" style="position:absolute;inset:auto 0 0 0;padding:0 18px 20px;display:flex;flex-direction:column;gap:8px;color:#fff">
+          <span style="font:800 19px/1.6 'Noto Kufi Arabic';color:#fff;text-wrap:pretty">{{ reelA.title }}</span>
+          <span style="font:500 13px 'IBM Plex Sans Arabic';color:#C9D5E6">{{ reelA.views }} مشاهدة</span>
+        </a>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between"><span style="font:700 15px 'Noto Kufi Arabic';color:#C9D5E6">التالي</span><div style="display:flex;gap:8px"><div onClick="{{ reelPrev }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;color:#fff" style-hover="background:rgba(255,255,255,.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div><div onClick="{{ reelNext }}" style="width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.25);display:grid;place-items:center;cursor:pointer;color:#fff" style-hover="background:rgba(255,255,255,.1)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div></div></div>
+        <sc-for list="{{ reelUp }}" as="u" hint-placeholder-count="4"><div onClick="{{ u.go }}" style="display:flex;align-items:center;gap:14px;padding:8px;border-radius:12px;cursor:pointer;opacity:{{ u.op }}" style-hover="background:rgba(255,255,255,.07)">
+          <div style="flex:none;width:58px;aspect-ratio:9/16;border-radius:8px;overflow:hidden;background:#0B1F42"><img src="{{ u.img }}" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="min-width:0;display:flex;flex-direction:column;gap:4px"><span style="font:700 11px 'Noto Kufi Arabic';color:#F7C600">{{ u.show }}</span><span style="font:700 14px/1.6 'Noto Kufi Arabic';color:#fff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ u.title }}</span></div>
+        </div></sc-for>
+      </div>
+    </div></sc-if>
+    <sc-if value="{{ s.isReels2 }}" hint-placeholder-val="{{ false }}"><div data-screen-label="Shorts deck" style="margin-top:32px;background:radial-gradient(circle at 22% 30%,rgba(63,151,207,.22),transparent 26%),radial-gradient(circle at 70% 80%,rgba(217,45,32,.12),transparent 24%),#F4F2EE;padding:48px 120px;display:grid;grid-template-columns:360px minmax(0,1fr);gap:40px;align-items:center;overflow:hidden">
+      <div style="position:relative;z-index:30;display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:3px;height:24px;background:#D92D20;border-radius:2px"></span><span style="font:500 20px 'Noto Kufi Arabic';color:#3D4450">مقاطع قصيرة</span></div>
+        <div style="display:flex;align-items:baseline;gap:8px;font:800 56px/1 'Noto Kufi Arabic';color:#121417">{{ reelCur }}<span style="font:600 18px 'Noto Kufi Arabic';color:#8A93A3">/ {{ reelTot }}</span></div>
+        <span style="font:700 13px 'Noto Kufi Arabic';color:#D92D20;margin-top:8px">{{ reelA.show }}</span>
+        <span style="font:800 26px/1.55 'Noto Kufi Arabic';color:#121417;text-wrap:pretty;min-height:120px">{{ reelA.title }}</span>
+        <div style="display:flex;align-items:center;gap:10px;font:500 14px 'IBM Plex Sans Arabic';color:#3D4450"><span>{{ reelA.views }} مشاهدة</span><span style="width:4px;height:4px;border-radius:50%;background:#8A93A3"></span><span>{{ reelA.dur }}</span></div>
+        <div style="display:flex;align-items:center;gap:10px;margin-top:12px"><div onClick="{{ reelPrev }}" style="width:48px;height:48px;border-radius:50%;border:1.5px solid #121417;display:grid;place-items:center;cursor:pointer;color:#121417" style-hover="background:#121417;color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"></path></svg></div><div onClick="{{ reelNext }}" style="width:48px;height:48px;border-radius:50%;border:1.5px solid #121417;display:grid;place-items:center;cursor:pointer;color:#121417" style-hover="background:#121417;color:#fff"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"></path></svg></div><a href="ShortsA.dc.html" style="margin-inline-start:8px;display:flex;align-items:center;gap:12px;background:#121417;color:#fff;border-radius:999px;height:48px;padding:0 24px;font:700 15px 'Noto Kufi Arabic'">كل المقاطع<span style="font:700 18px sans-serif">←</span></a></div>
+      </div>
+      <div style="position:relative;height:600px;isolation:isolate">
+        <sc-for list="{{ reels }}" as="r" hint-placeholder-count="5"><div onClick="{{ r.cfClick }}" style="position:absolute;left:50%;top:50%;width:300px;aspect-ratio:9/16;border-radius:18px;overflow:hidden;background:#0B1F42;cursor:pointer;transform:{{ r.cfT }};z-index:{{ r.cfZ }};opacity:{{ r.cfOp }};box-shadow:0 24px 50px rgba(10,20,40,.35);transition:transform .55s cubic-bezier(.3,.7,.2,1),opacity .4s;pointer-events:{{ r.cfPe }}">
+          <img src="{{ r.img }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+          <div style="position:absolute;inset:0;background:rgba(7,23,53,{{ r.cfDim }});transition:background .4s"></div>
+          <sc-if value="{{ r.on }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;display:grid;place-items:center;background:linear-gradient(0deg,rgba(7,23,53,.6),rgba(7,23,53,0) 40%)"><div style="width:68px;height:68px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center"><span style="width:0;height:0;border-top:12px solid transparent;border-bottom:12px solid transparent;border-left:18px solid #121417;margin-left:5px"></span></div></div></sc-if>
+        </div></sc-for>
+      </div>
+    </div></sc-if>
+    <sc-if value="{{ s.isOp }}" hint-placeholder-val="{{ false }}"><div style="margin-top:32px;padding:32px 120px 36px;background:#F5F6F8;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #D5DAE1"><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:8px;margin-bottom:-1px">رأي</span><a href="#" style="font:600 14px 'Noto Kufi Arabic'">كل الكتّاب ‹</a></div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px"><sc-for list="{{ opinion }}" as="o" hint-placeholder-count="4"><div style="background:#fff;border-radius:8px;padding:20px;display:flex;flex-direction:column;gap:14px"><div style="display:flex;align-items:center;gap:12px"><sc-if value="{{ o.img }}" hint-placeholder-val="{{ true }}"><img src="{{ o.img }}" alt="" style="width:56px;height:56px;border-radius:50%;object-fit:cover"></sc-if><sc-if value="{{ o.noImg }}" hint-placeholder-val="{{ false }}"><span style="width:56px;height:56px;border-radius:50%;background:#0A2B5C;color:#F7C600;display:grid;place-items:center;font:800 20px 'Noto Kufi Arabic'">{{ o.ini }}</span></sc-if><span style="font:700 14px 'Noto Kufi Arabic';color:#3F97CF">{{ o.name }}</span></div><span style="font:700 17px/1.6 'Noto Kufi Arabic';color:#121417">{{ o.title }}</span></div></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isSec }}" hint-placeholder-val="{{ false }}"><div style="padding:32px 120px 8px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E7EC"><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:8px;margin-bottom:-1px">أسرار المدن</span><a href="#" style="font:600 14px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px"><sc-for list="{{ secrets }}" as="x" hint-placeholder-count="3"><div style="border:1px solid #E4E7EC;border-top:3px solid #F7C600;border-radius:6px;padding:18px;display:flex;flex-direction:column;gap:8px"><span style="font-size:12px;color:#5E6673">{{ x.date }}</span><span style="font:700 17px 'Noto Kufi Arabic';color:#0A2B5C">{{ x.title }}</span><span style="font-size:14px;line-height:1.8;color:#3D4450">{{ x.text }}</span></div></sc-for></div>
+    </div></sc-if>
+    <sc-if value="{{ s.isNews }}" hint-placeholder-val="{{ false }}"><div style="margin:36px 120px 4px;background:#0A2B5C;border-radius:10px;padding:28px 36px;display:flex;align-items:center;gap:32px"><div style="flex:1;display:flex;flex-direction:column;gap:6px"><span style="font:700 22px 'Noto Kufi Arabic';color:#fff">إشترك في النشرة الإخبارية ليصلك كل جديد</span><span style="font-size:14px;color:#C9D5E6">اشترك معنا في نشرة المدن الدورية لتبقى على اتصال دائم بالحدث</span></div><div style="display:flex;gap:8px;width:460px"><div style="flex:1;height:48px;border-radius:6px;background:#fff;padding:0 14px;display:flex;align-items:center;font-size:14px;color:#8A93A3">بريدك الإلكتروني</div><div style="height:48px;padding:0 24px;border-radius:6px;background:#F7C600;display:grid;place-items:center;font:700 15px 'Noto Kufi Arabic';color:#071C3D">اشترك الآن</div></div></div></sc-if>
+    <sc-if value="{{ s.isMostInfo }}" hint-placeholder-val="{{ false }}"><div style="padding:36px 120px 44px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:40px">
+      <div style="display:flex;flex-direction:column;gap:4px"><div style="display:flex;border-bottom:1px solid #E4E7EC;margin-bottom:8px"><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:8px;margin-bottom:-1px">الأكثر قراءة</span></div><sc-for list="{{ most }}" as="m" hint-placeholder-count="5"><div style="display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #F0F2F5"><span style="font:800 30px/1 'Noto Kufi Arabic';color:#3F97CF;width:26px;flex:none">{{ m.n }}</span><span style="font:700 15px/1.6 'Noto Kufi Arabic';color:#121417">{{ m.title }}</span></div></sc-for></div>
+      <div style="display:flex;flex-direction:column;gap:20px"><div style="display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #E4E7EC"><span style="font:700 22px 'Noto Kufi Arabic';color:#0A2B5C;border-bottom:3px solid #0A2B5C;padding-bottom:8px;margin-bottom:-1px">إنفوغراف</span><a href="#" style="font:600 14px 'Noto Kufi Arabic'">عرض المزيد ‹</a></div><div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px"><sc-for list="{{ info }}" as="g" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:8px"><img src="{{ g.img }}" alt="" style="display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:6px"><span style="font:700 17px/1.55 'Noto Kufi Arabic';color:#121417">{{ g.title }}</span><span style="font-size:12px;color:#5E6673">{{ g.by }}</span></div></sc-for></div></div>
+    </div></sc-if>
+  </div></sc-for>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;1440px&quot;,&quot;height&quot;:&quot;900px&quot;},&quot;mobile&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;part&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;header&quot;,&quot;top&quot;,&quot;mid&quot;,&quot;bottom&quot;],&quot;default&quot;:&quot;top&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;topv&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;a&quot;,&quot;b&quot;],&quot;default&quot;:&quot;a&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tl&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;10&quot;,&quot;3&quot;,&quot;1&quot;,&quot;0&quot;],&quot;default&quot;:&quot;10&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { s: false, q: '', m: false, ra: 0, sp: false, fi: 0 };
+  feedR = React.createRef();
+  carStep(dir) {
+    const n = ((window.PLUS_DATA || {}).shorts || []).length; if (!n) return;
+    const ci = this.state.ci || 0;
+    if (dir > 0) { this.setState({ ci: ci + 1, cNo: false }); if (ci + 1 >= n) setTimeout(() => this.setState({ ci: 0, cNo: true }), 720); }
+    else if (ci === 0) { this.setState({ ci: n, cNo: true }); requestAnimationFrame(() => requestAnimationFrame(() => this.setState({ ci: n - 1, cNo: false }))); }
+    else this.setState({ ci: ci - 1, cNo: false });
+  }
+  componentDidMount() { this.carT = setInterval(() => { /* carousel auto-advance disabled */ }, 3500); this.storyT = setInterval(() => { if (this.props.reelStyle !== 'story' || this.props.mobile || this.state.sp) return; const n = ((window.PLUS_DATA || {}).shorts || []).length; if (n) this.setState(s => ({ ra: (s.ra + 1) % n })); }, 6000); }
+  componentWillUnmount() { clearInterval(this.storyT); clearInterval(this.carT); }
+  reelVals(m) {
+    const P = window.PLUS_DATA || { shorts: [] }, L = P.shorts || [], a = Math.min(this.state.ra, Math.max(L.length - 1, 0));
+    const set = i => () => this.state.ra !== i && this.setState({ ra: i });
+    const reels = L.map((x, i) => ({ ...x, n: String(i + 1).padStart(2, '0'), on: i === a, off: i !== a, go: set(i),
+      flex: i === a ? (m ? '0 0 202px' : '0 0 270px') : (m ? '0 0 52px' : '1 1 0'),
+      ...(() => { const n = L.length, d = ((i - a) % n + n + Math.floor(n / 2)) % n - Math.floor(n / 2), ad = Math.abs(d); return { cfT: 'translate(-50%,-50%) translateX(' + (-d * 125) + 'px) scale(' + (1 - ad * 0.14).toFixed(2) + ') rotate(' + (d * -4) + 'deg)', cfZ: 20 - ad, cfOp: ad > 2 ? 0 : 1, cfPe: ad > 2 ? 'none' : 'auto', cfDim: ad === 0 ? 0 : Math.min(0.25 + ad * 0.12, 0.6), cfClick: i === a ? () => { location.href = 'ShortsA.dc.html'; } : set(i) }; })(), op: i === a ? 1 : 0.55, seg: i <= a ? '#fff' : 'rgba(255,255,255,.22)', done: i < a }));
+    const reelUp = [1, 2, 3, 4].filter(k => k < L.length).map(k => { const j = (a + k) % L.length; return { ...L[j], go: set(j), op: (1 - (k - 1) * 0.18).toFixed(2) }; });
+    const n = L.length, ci = this.state.ci || 0, act = n ? ci % n : 0;
+    const vids = ['https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4', 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4'];
+    const carItems = L.map((x, i) => { const hv = this.state.ch === i; return { ...x, hov: hv, video: x.video || vids[i % vids.length], w: hv ? '252px' : '184px', sh: hv ? '0 18px 36px rgba(10,20,40,.3)' : '0 4px 12px rgba(10,20,40,.08)',
+      enter: () => this.setState({ ch: i }), leave: () => this.state.ch === i && this.setState({ ch: -1 }) }; });
+    const carDots = L.map((x, i) => ({ w: i === act ? '28px' : '8px', bg: i === act ? '#D92D20' : '#C8CED8', go: () => this.setState({ ci: i, cNo: false }) }));
+    return { reels, reelUp, carItems, carDots, carT: 'translateX(' + (ci * 200) + 'px)', carTr: this.state.cNo ? 'none' : 'transform .7s cubic-bezier(.3,.7,.2,1)',
+      carVid: el => { if (el) { el.muted = true; if (el.paused) el.play().catch(() => {}); } }, carNext: () => this.carStep(1), carPrev: () => this.carStep(-1), carPause: () => { this.cp = true; }, carPlay: () => { this.cp = false; }, feedRef: this.feedR, feedCur: String((this.state.fi || 0) + 1).padStart(2, '0'),
+      feedScroll: e => { const el = e.currentTarget, i = Math.round(el.scrollTop / el.clientHeight); if (i !== (this.state.fi || 0)) this.setState({ fi: i }); },
+      feedUp: () => { const el = this.feedR.current; if (el) el.scrollBy({ top: -el.clientHeight, behavior: 'smooth' }); },
+      feedDown: () => { const el = this.feedR.current; if (el) el.scrollBy({ top: el.clientHeight, behavior: 'smooth' }); }, storyState: this.state.sp ? 'paused' : 'running', storyPause: () => this.setState({ sp: true }), storyPlay: () => this.setState({ sp: false }), reelA: L[a] || {}, reelCur: String(a + 1).padStart(2, '0'), reelTot: String(L.length).padStart(2, '0'),
+      reelNext: () => this.setState({ ra: (a + 1) % L.length }), reelPrev: () => this.setState({ ra: (a - 1 + L.length) % L.length }) };
+  }
+  tlVals(tlN) {
+    const raw = [
+      ['13:42', 'غارة جديدة على أطراف المنصوري وأنباء عن إصابات', 1],
+      ['13:20', 'الجيش الإسرائيلي يفجّر منازل في حولا ويضرم النار فيها'],
+      ['12:55', 'مشاهد من الدخان المتصاعد فوق المنصوري', 0, '01:49'],
+      ['12:31', 'الدفاع المدني يعمل على إخماد الحرائق في حولا'],
+      ['11:58', 'مسيّرة إسرائيلية تحلّق على علو منخفض فوق صور'],
+      ['11:40', 'بلدية المنصوري تدعو السكان إلى الابتعاد عن الأحياء الجنوبية'],
+      ['11:05', 'بدء موجة الغارات على قرى القطاع الغربي'],
+      ['10:47', 'سيارات الإسعاف تتوجه إلى بلدات القطاع الغربي', 0, '00:58'],
+      ['10:30', 'إقفال المدارس في عدد من بلدات قضاء صور'],
+      ['10:12', 'تحليق مكثف للطيران الحربي فوق الجنوب']
+    ].slice(0, tlN);
+    const mk = show => show.map(([time, text, live, dur], i) => ({ time, text, video: !!dur, dur,
+      dot: i === 0 ? '#D92D20' : dur ? '#F7C600' : '#9FB2CC', tc: i === 0 ? '#D92D20' : '#5E6673',
+      upC: i === 0 ? 'transparent' : '#D5DAE1', dnC: i === show.length - 1 ? 'transparent' : '#D5DAE1' }));
+    const ups = mk(raw.slice(0, 4)), upsD = mk(raw);
+    return { ups, upsD, upLatest: raw[0] ? raw[0][0] : '', upTotal: raw.length, upMore: raw.length > 4, tlAny: tlN > 0 };
+  }
+  renderVals() {
+    const A = 'https://assets.almodon.com/styles/';
+    const tlN = this.props.tl == null ? 10 : +this.props.tl; const m = !!this.props.mobile, p = this.props.part || 'top', home = this.props.active === 'home';
+    const P = window.PLUS_DATA || { episodes: [] };
+    const nav = ['الرئيسية', 'سياسة', 'اقتصاد', 'عرب وعالم', 'محطات', 'رأي', 'ثقافة', 'ميديا', 'إنفوغراف'];
+    const tlRaw = [
+      ['13:42', 'سياسة', 'انفجارات ضخمة تهز المنصوري وإسرائيل تحرق منازل في حولا', 1],
+      ['13:20', 'عرب وعالم', 'ترامب يرجح انتهاء الحرب قريباً: إيران في وضع صعب', 1],
+      ['12:55', 'نشرة المدن', 'تسوية اللحظة الأخيرة هل تنقذ المفتي دريان؟', 0, '01:49'],
+      ['12:31', 'عرب وعالم', 'إعلام عبري: محاولة لاغتيال علي العمودي ومصيره مجهول'],
+      ['11:58', 'عرب وعالم', '"أكسيوس": اجتماع سري في كامب ديفيد لمناقشة ملفي إيران واليمن'],
+      ['11:40', 'سياسة', 'زيارة سلام إلى النبطية: وجع الجنوبيين في حضرة الدولة'],
+      ['11:05', 'اقتصاد', 'شاحنات القمح عالقة في المصنع بانتظار الفحوص']
+    ];
+    const tl = tlRaw.map(([time, cat, title, live, dur], i) => ({ time, cat, title, live: !!live, video: !!dur, dur, dot: live ? '#D92D20' : dur ? '#F7C600' : i === 0 ? '#0A2B5C' : '#C9D0DA', tc: live ? '#D92D20' : '#5E6673' }));
+    const lead = { img: A + 'large_855x485/public/2026-10/image-1791021300.jpeg.webp?itok=Mcszjigy', cat: 'سياسة', title: 'انفجارات ضخمة تهز المنصوري وإسرائيل تحرق منازل في حولا', by: 'المدن - سياسة · منذ 20 دقيقة', ex: 'تتواصل الغارات الإسرائيلية على قرى الجنوب، وسط انفجارات متتالية في المنصوري وإحراق منازل في بلدة حولا الحدودية.' };
+    const side2 = [
+      { img: A + 'medium_275x155/public/2026-06/image-1781456391.jpg.webp?itok=RRcJbPqy', cat: 'عرب وعالم', title: 'ترامب يرجح انتهاء الحرب قريباً: إيران في وضع صعب', by: 'المدن - عرب وعالم' },
+      { img: A + 'medium_275x155/public/2026-10/image-1790958497.jpg.webp?itok=CsS-NBV5', cat: 'سياسة', title: 'زيارة سلام إلى النبطية: وجع الجنوبيين في حضرة الدولة', by: 'غادة حلاوي' }
+    ];
+    const top4 = [
+      { img: A + 'medium_340x195/public/60BE26D4-0E4A-444B-B555-D334FACD844C.jpg.webp?itok=M2yKzoN5', cat: 'ميديا', title: 'أولمرت يكشف كواليس اغتيال مغنية: هذه المرأة حرّكت العملية', by: 'أدهم مناصرة', ex: 'أكد إيهود أولمرت في كتابه أن أحداً من ضباط الموساد لم يصدق حدسها...' },
+      { img: A + 'medium_340x195/public/2025-07/6_4.jpg.webp?itok=W8edaKQ-', cat: 'سياسة', title: '"العفو العام" يصل إلى سوريا: هل يُخلى سبيل محكومين سوريين؟', by: 'فرح منصور', ex: 'طلبت سوريا من لبنان معرفة أسماء كل المحكومين السوريين الذين استفادوا من قانون العفو العام...' },
+      { img: A + 'medium_340x195/public/2026-10/image-1790969490.jpg.webp?itok=_ND27Xrg', cat: 'سياسة', title: 'آلان عون لـ"المدن": لبنان عاجز في التفاوض.. كما الحرب', by: 'شربل عبود', ex: 'يعتبر آلان عون أن هناك حالة عجز كلي على مستوى لبنان...' },
+      { img: A + 'medium_340x195/public/2026-10/image-1790942286.jpeg.webp?itok=qE-6TkHD', cat: 'محطات', title: 'العدو قتل عائلته: "أولادي كانوا حياتي، ولم يبقَ لي سوى علي"', by: 'نغم ربيع', ex: 'لم يكن عباس زيعور موجوداً في المنزل لحظة الغارة...' }
+    ];
+    const sec = (title, list, l, items) => ({ isStd: true, title, cards: !list, list: !!list, lead: l, items, items3: items.slice(0, 3) });
+    const M = s => A + 'medium_340x195/public/' + s, S = s => A + 'small_195x110/public/' + s, L = s => A + 'large_465x265/public/' + s;
+    const politics = sec('سياسة', 0, { img: M('2026-10/image-1790956331.jpg.webp?itok=drcf5z5j'), title: 'الدولة في النبطية... والتفاوض في فخ الشروط الإسرائيلية', by: 'منير الربيع', ex: 'زيارة رئيس الحكومة إلى النبطية حملت رسائل طمأنة للجنوبيين، فيما يتعثر مسار التفاوض.' }, [
+      { img: M('2026-10/image-1790933883.jpg.webp?itok=hpcAl902'), title: 'عون يطمئن الجنوبيين.. وجنبلاط ينصح بالاستفادة من مسار أوسلو' },
+      { img: M('E3A3EC8E-88C1-4C5D-B377-4D5213B2E67A.jpg.webp?itok=jBPzXGPf'), title: 'اختلاس وهدر للمال العام: أمين سلام وشقيقه إلى محكمة الجنايات' },
+      { img: M('F291C8AA-7FDB-4D9A-8362-CA0C35969E51.jpg.webp?itok=-sbOq03e'), title: 'أزمة في دار الفتوى بعد إبطال التمديد: محاولات لتجاوز الكردي' },
+      { img: M('2026-10/image-1790947713.jpg.webp?itok=PSAdqMhX'), title: 'النبطية الفوقا: عودةٌ لساعة واحدة ومصيرٌ معلّق' }]);
+    const economy = sec('اقتصاد', 0, { img: M('78CF4D3C-1D65-41E0-A996-A3535E7BB1BD.jpg.webp?itok=G9pvNbo8'), title: 'محطة للغاز ومعمل للكهرباء: ساعات تغذية أم أكلاف إضافية؟', by: 'خضر حسان', ex: 'سيقوم لبنان عبر المحطة بإعادة الغاز المضغوط الذي يتم استيراده على شكل سائل إلى حالته الغازية.' }, [
+      { img: M('2026-10/image-1791019690.png.webp?itok=eN3FD_L_'), title: 'استثناء أميركي يتيح 40 رحلة إيرانية يومياً إلى النجف' },
+      { img: M('2026-10/image-1791026560.png.webp?itok=FeQfHOnX'), title: 'السعودية ترفع صادرات النفط عبر خط "شرق- غرب"' },
+      { img: M('2026-10/image-1791017736.png.webp?itok=y033csNA'), title: 'الأسواق تترقب الإفراج عن النفط وقرار ترامب... ماذا عن لبنان؟' },
+      { img: M('2026-10/image-1791014340.png.webp?itok=fY9vT5TJ'), title: 'شاحنات القمح عالقة في المصنع بانتظار الفحوص' }]);
+    const arab = sec('عرب وعالم', 1, { img: A + 'large_570x325/public/2026-01/image-1769094188.jpg.webp?itok=kM-CJRO0', title: 'مصدر لـ"المدن": إعادة هيكلة انتشار «قسد» وتشديد أمني بالحسكة', by: 'المدن - عرب وعالم', ex: 'مصدر أمني لـ"المدن": ترتيبات عسكرية وأمنية جديدة في مناطق سيطرة "قسد".' }, [
+      { img: A + 'medium_305x175/public/2025-09/image-1758558065.jpg.webp?itok=ORIoymhz', title: 'نتنياهو يتنصل من 7 أكتوبر ويبرر إبادة غزة بشواهد توراتية' },
+      { img: A + 'medium_305x175/public/2026-08/image-1788012194.jpg.webp?itok=ZxsCE6oj', title: '8 شهداء في غزة خلال يومين بينهم 5 بقصف شقة غرب المدينة' },
+      { img: A + 'medium_305x175/public/2298171620.jpeg.webp?itok=64W6kLIj', title: 'أوروبا في مواجهة صدمة الطاقة' },
+      { img: L('2026-07/image-1784973746.jpg.webp?itok=AveaGtbH'), title: 'الصراع على هرمز وباب المندب... قرون من التنافس لا تبدأ اليوم' }]);
+    const society = sec('محطات', 0, { img: L('2026-07/image-1783344247.jpg.webp?itok=xcJm19IV'), title: 'كأنهم يقولون لنا تعالوا وانضموا إلى المجزرة!', by: 'المدن - محطات', ex: 'شهادات من النبطية عن أيام القصف والنزوح والعودة المؤجلة.' }, [
+      { img: S('2026-10/image-1790938776.jpg.webp?itok=amvbQyOA'), title: 'إضراب "العفو العام" يدخل يومه العشرين.. والسلّ يهدّد السجناء' },
+      { img: S('7777C89F-0F45-4325-BAE8-955D5E5D5AE0.jpg.webp?itok=jjUbAf8C'), title: 'بيروت "التي لا تنام" مدينة متهالكة: خدمات تتعثر وأبنية مهددة' },
+      { img: S('A5B2E0C1-CAFA-4678-A38D-90BD7CE9535E.jpg.webp?itok=2AyN6fUp'), title: 'الأمن العام ومراكز "التدليك": تنظيم القطاع ومكافحة الشبهات' },
+      { img: M('2026-10/image-1790942286.jpeg.webp?itok=qE-6TkHD'), title: 'العدو قتل عائلته: "أولادي كانوا حياتي، ولم يبقَ لي سوى علي"' }]);
+    const culture = sec('ثقافة', 1, { img: L('2026-10/image-1790925465.jpg.webp?itok=TtBwt40Q'), title: 'إن كان استخدام الذكاء الاصطناعي تهمة...فلنرمِ المُحرِّر بحجر', by: 'المدن - ثقافة', ex: 'نقاش في حدود الكتابة والتحرير في زمن الذكاء الاصطناعي.' }, [
+      { img: S('2026-10/image-1791010718.jpg.webp?itok=htR96Dwg'), title: 'دعوة لمقاطعة حفلة أندريا بوتشيلي في الأردن: داعم لإسرائيل' },
+      { img: S('2026-10/image-1791009266.jpg.webp?itok=aZPUp16v'), title: '"بيروت كتب": الفرانكوفونية ضيفة معرض بيروت..والناشئة نجومها' },
+      { img: S('2026-10/image-1790932161.jpg.webp?itok=OEJnox3v'), title: 'المخرج عبدو مدخنة: تجربة الثورة السورية تستحق إعادة النظر' },
+      { img: M('2026-10/image-1791006366.jpg.webp?itok=Gb5Io3X-'), title: 'صامويل فيتوسي:لا للكتابة بالذكاء الاصطناعي..نعم لإطلاق النار' }]);
+    const media = sec('ميديا', 0, { img: L('2026-06/image-1781942275.jpg.webp?itok=BmNB2vyY'), title: 'سوريا: اختصاصات جامعية للذكور فقط!', by: 'المدن - ميديا', ex: 'قرار جامعي يثير موجة انتقادات واسعة على مواقع التواصل.' }, [
+      { img: S('2026-10/image-1790942248.jpeg.webp?itok=2EvEjhRp'), title: 'المؤسسات القطرية تستقطب إعلاميين لبنانيين: تنوع سياسي ومهني' },
+      { img: S('2026-10/image-1790948623.jpg.webp?itok=DaKiLX9C'), title: 'صورتان في استقبال سلام في النبطية... ما دلالتهما؟' },
+      { img: S('2026-01/image-1767636513.jpg.webp?itok=BbFvxFuo'), title: 'ترامب استعان بـ"غروك" قبل عملية فنزويلا' },
+      { img: M('60BE26D4-0E4A-444B-B555-D334FACD844C.jpg.webp?itok=M2yKzoN5'), title: 'أولمرت يكشف كواليس اغتيال مغنية: هذه المرأة حرّكت العملية' }]);
+    const opinion = [
+      { name: 'خطار أبو دياب', ini: 'خ', title: 'أوروبا في مواجهة صدمة الطاقة' },
+      { name: 'نور السيد', img: A + 'small_120x120/public/802C556A-6379-4143-AE61-F836F7F0BB80.jpg.webp?itok=sHkf8QAM', title: 'فتيات "اللاييك" وفتيانها..وسوريا الصغيرة' },
+      { name: 'سوزان ماهر', img: A + 'small_120x120/public/2026-09/image-1790179850.jpeg.webp?itok=lvI0kdf3', title: 'التربية كمهنة مهدَّدَة بالانقراض' },
+      { name: 'حلا منصور', img: A + 'small_120x120/public/2026-09/image-1789411296.jpg.webp?itok=b71M2_bK', title: 'لا مكان لسوريا في "ريلز" المدن' }
+    ].map(o => ({ ...o, img: o.img || '', noImg: !o.img }));
+    const secrets = [
+      { date: 'الخميس 1 تشرين الأول 2026', title: 'عتب الحزب على عون', text: 'يسجل حزب الله عتباً على رئيس الجمهورية، الذي لم يصدر موقفاً يتعلق بالأمين العام السابق للحزب، السيد حسن نصرالله، في ذكرى اغتياله.' },
+      { date: 'الخميس 1 تشرين الأول 2026', title: 'صرف بدل إيواء...قريباً؟', text: 'يستعد حزب الله لمرحلة جديدة من التعاطي مع ملف النازحين والأهالي الذين دُمرت منازلهم في الجنوب، تبدأ بإقرار مبدأ صرف بدل إيواء.' },
+      { date: 'الخميس 1 تشرين الأول 2026', title: 'الحكومة فشلت ولو لم تسقط', text: 'أكدت مصادر غير سياسية أن الحكومة الحالية لن تسقط في الشارع، لكن ذلك لن يمنع بعض القوى السياسية من السعي إلى إظهار فشلها.' }
+    ];
+    const most = ['انفجارات ضخمة تهز المنصوري وإسرائيل تحرق منازل في حولا', 'أولمرت يكشف كواليس اغتيال مغنية: هذه المرأة حرّكت العملية', 'آلان عون لـ"المدن": لبنان عاجز في التفاوض.. كما الحرب', 'تحقيقات رحلة فلاي دبي: مساعد الطيار حاول تنفيذ عملية إرهابية', '"العفو العام" يصل إلى سوريا: هل يُخلى سبيل محكومين سوريين؟'].map((title, i) => ({ n: i + 1, title }));
+    const info = [
+      { img: A + 'medium_255x145/public/2026-10/image-1791028802.png.webp?itok=s0IKSBEZ', title: 'مسارات للنفط والغاز بديلة عن هرمز', by: 'المدن - اقتصاد' },
+      { img: A + 'medium_255x145/public/2026-09/image-1790333524.png.webp?itok=ek579rcc', title: 'خلافات حول الذكاء الاصطناعي', by: 'المدن - ميديا' }
+    ];
+    const rs = m ? (this.props.reelStyle === 'carousel' ? 'carousel' : '') : this.props.reelStyle, r2 = rs === 'deck', r3 = rs === 'story', r4 = rs === 'feed', r5 = rs === 'carousel';
+    const mid = this.props.reels ? [politics, { isReels: !r2 && !r3 && !r4 && !r5, isReels2: r2, isReels3: r3, isReels4: r4, isReels5: r5 }, { isOp: true }, { isSec: true }] : [politics, { isOp: true }, { isSec: true }];
+    const bottomM = [economy, { isNews: true }, arab, society, culture, media, { isMost: true }, { isInfo: true }];
+    const bottomD = [economy, { isNews: true }, arab, society, culture, media, { isMostInfo: true }];
+    const q = this.state.q.trim();
+    const hit = t => !q || t.includes(q);
+    const allArt = [lead, ...side2, ...top4].map(a => ({ cat: a.cat, title: a.title }));
+    const vids = (P.episodes || []).filter(e => hit(e.title) || hit(e.show));
+    const arts = allArt.filter(a => hit(a.title));
+    return {
+      nav: nav.map((label, i) => { const a = home && i === 0; return { label, c: a ? '#0A2B5C' : '#121417', bd: a ? '#0A2B5C' : 'transparent', mc: a ? '#0A2B5C' : '#121417', ac: a ? '#F7C600' : '#9FB2CC' }; }),
+      pBg: home ? 'transparent' : '#0A2B5C', pBd: home ? 'transparent' : '#F7C600', pFg: home ? '#0A2B5C' : '#fff', pmBg: home ? '#fff' : '#0A2B5C', pmFg: home ? '#0A2B5C' : '#fff', hM: p === 'header' && m, hD: p === 'header' && !m, tM: p === 'top' && m && this.props.topv !== 'b', tD: p === 'top' && !m && this.props.topv !== 'b', tMB: p === 'top' && m && this.props.topv === 'b', tDB: p === 'top' && !m && this.props.topv === 'b',
+      bLead: lead, bCards: [{ ...side2[0], ex: 'يرى الرئيس الأميركي أن الضغوط العسكرية والاقتصادية وضعت طهران أمام خيارات محدودة، فيما تتواصل الاتصالات الإقليمية.' }, { ...side2[1], ex: 'جولة رئيس الحكومة في الجنوب تكشف حجم الأضرار وتعيد طرح سؤال الإعمار ودور الدولة.' }], bSmall: top4.slice(0, 2),
+      isM: m && (p === 'mid' || p === 'bottom'), isD: !m && (p === 'mid' || p === 'bottom'),
+      secsM: p === 'mid' ? mid : bottomM, secsD: p === 'mid' ? mid : bottomD,
+      ...this.tlVals(tlN), ...this.reelVals(m), side1: { ...side2[0], ex: 'يرى الرئيس الأميركي أن الضغوط العسكرية والاقتصادية وضعت طهران أمام خيارات محدودة، فيما تتواصل الاتصالات الإقليمية.' }, tlNone: tlN === 0, sideTxt: [{ cat: 'اقتصاد', title: 'شاحنات القمح عالقة في المصنع بانتظار الفحوص', by: 'المدن - اقتصاد · منذ ساعتين' }].map((x, n, a) => ({ ...x, pb: n === a.length - 1 ? '0' : '20px', bd: n === a.length - 1 ? 'none' : '1px solid #E4E7EC' })), lead, side2, top4, opinion, secrets, most, info,
+      sOpen: this.state.s, q: this.state.q, sBtnBg: this.state.s ? '#EEF2F7' : 'transparent',
+      toggleS: () => this.setState(s => ({ s: !s.s, m: false })), toggleM: () => this.setState(s => ({ m: !s.m, s: false })), mOpen: this.state.m, mBtnBg: this.state.m ? '#EEF2F7' : 'transparent', onQ: e => this.setState({ q: e.target.value }),
+      trending: ['المنصوري', 'العفو العام', 'هرمز', 'وجهًا لوجه', 'النبطية'].map(label => ({ label, on: () => this.setState({ q: label }) })),
+      sVideos: (vids.length ? vids : P.episodes || []).slice(0, m ? 2 : 3), sArticles: (arts.length ? arts : allArt).slice(0, 3)
+    };
+  }
+}
+</script>
+</body>
+</html>
